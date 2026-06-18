@@ -1,0 +1,20 @@
+select 
+rep.M_REF_DATA, rep.M_MX_REF_JOB,
+rtrim(job.M_GROUP) JOBGRP, rtrim(job.M_OWNER) JOBOWN,
+to_char(job.M_DATE,'YYYY-MM-DD') JOBDAT,
+rep.M_POS_ID, rep.M_CONTRACT_ , M_TRADE_NUM, 
+rep.M_PORTFOLIO, M_COUNTERPA,
+rep.M_INSTRUMEN, rep.M_CUR, M_PL_NATIVE, 
+M_PLMTM_NAT, M_PLMTM_USD, M_PLMTM_CNV
+
+from MUREX_DM_OWNER.TRF_PL_DAILYMOVE_REP rep
+left join MUREX_MX_OWNER.ACT_JOB_DBF job on rep.M_MX_REF_JOB = job.M_IDJOB
+
+where 1 = 1
+and rep.M_TRADE_NUM = 28153425
+and rtrim(job.M_OWNER) = 'EODGLB'
+
+
+
+
+ 

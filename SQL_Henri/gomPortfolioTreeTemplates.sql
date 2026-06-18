@@ -1,0 +1,3 @@
+select
+tpl.M_TRE_GROUP GRP, tpl.M_LABEL TEMPLATE
+from MUB#MUB_TPL_DBF tpl

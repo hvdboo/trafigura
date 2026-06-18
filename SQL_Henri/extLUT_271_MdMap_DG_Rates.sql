@@ -1,0 +1,14 @@
+select 
+trim(M_DGPTYPE) as PRODTYPE, 
+trim(M_DGMODEL) as MODEL, 
+trim(M_DGRGRPLABL) as MXLABEL, 
+trim(M_DGTENOR)  as TENOR, 
+trim(M_DGSEP)    as SEP, 
+trim(M_DGMATFOR) as MATFORM, 
+trim(M_DGPUBLICAT) as PUBLICATION, 
+trim(M_DGPRICECOL) as PRICECOL, 
+trim(M_DGFOLDER)  as FOLDER, 
+trim(M_DGCMPSITE) as COMP,
+trim(M_DGDIVIDE)  as DIV
+
+from UDTB271_DBF

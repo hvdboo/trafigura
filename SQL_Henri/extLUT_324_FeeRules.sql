@@ -1,0 +1,32 @@
+select
+rtrim(tbl.M_FEE_COD)  FeeCode,
+rtrim(tbl.M_MKT_TRAF) Market,
+rtrim(tbl.M_FEE_CTP)  FeeCounterpart,
+rtrim(tbl.M_CTP)      Counterpart,
+rtrim(tbl.M_LEGAL_ENTY) LegalEntity,
+rtrim(tbl.M_CMASSET)   Asset,
+rtrim(tbl.M_PHYSICAL)  Physical,
+rtrim(tbl.M_UNIT)      Unit,
+rtrim(tbl.M_CURRENCY)  Currency,
+rtrim(tbl.M_TYPO_TRAF) Typology,
+rtrim(tbl.M_PLIN_TRAF) Instrument,
+rtrim(tbl.M_MAT_COD)   MatCode,
+rtrim(tbl.M_MAT_LAB)   MatLabel,
+rtrim(tbl.M_MAT_HOR)   MatHorizon,
+rtrim(tbl.M_VENUE) Venue,
+rtrim(tbl.M_BATCH) Batch,
+rtrim(tbl.M_COMPOUND)  Compound,
+rtrim(tbl.M_DIRECTION) TradeDirection,
+rtrim(tbl.M_EVENT) Event,
+'>',
+rtrim(tbl.M_FEE_RULE) FeeRule,
+tbl.M_FEE_RATE FeeRate,
+rtrim(tbl.M_CCY) FeeCur,
+tbl.M_DECIMALS Decim,
+rtrim(tbl.M_ROUND_METH) RoundingMethod,
+rtrim(tbl.M_FEE_STL) FeeSettlement,
+rtrim(tbl.M_SRCTBL) SourceTbl,
+tbl.M_UID
+
+from UDTB324_DBF tbl
+order by FeeCode, FeeCounterpart, Asset, Physical, Instrument, Unit

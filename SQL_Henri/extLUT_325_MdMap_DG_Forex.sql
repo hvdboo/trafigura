@@ -1,0 +1,14 @@
+select 
+trim(M_DGPTYPE) as PRODTYPE, 
+trim(M_DGMODEL) as TICKER, 
+trim(M_EXCHANGE) as EXCHANGE,
+trim(M_DGMATFOR) as MATFORM, 
+trim(M_DGSEP) as SEPARATOR,
+trim(M_DGFGRPLABL) as FXC_LABEL, 
+trim(M_DGFOLDER) as FOLDER, 
+trim(M_DGTENOR) as TENOR,  
+trim(M_DGPRICECOL) as PRICECOL, 
+trim(M_DGCMPSITE) as COMP,  
+trim(M_DGDIVIDE) as DIV
+
+from UDTB325_DBF 

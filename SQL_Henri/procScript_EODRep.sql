@@ -1,0 +1,303 @@
+select distinct
+case pss.M_REF
+when 123 then   1
+when 166 then   2
+when 167 then   3
+when 388 then   4
+when 393 then   5
+when 394 then   6
+when 396 then   7
+when 399 then   8
+when 392 then   9
+when 395 then  10
+when 391 then  11
+when 287 then  12
+when 301 then  13
+when 267 then  14
+when 298 then  15
+when 299 then  16
+when 296 then  17
+when 401 then  18
+when 264 then  19
+when 276 then  20
+when 260 then  21
+when 252 then  22
+when 253 then  23
+when 327 then  24
+when 254 then  25
+when 255 then  26
+when 256 then  27
+when 257 then  28
+when 258 then  29
+when 259 then  30
+when 292 then  31
+when 269 then  32
+when 270 then  33
+when 328 then  34
+when 271 then  35
+when 272 then  36
+when 273 then  37
+when 274 then  38
+when 293 then  39
+when 279 then  40
+when 288 then  41
+when 302 then  42
+when 333 then  43
+when 291 then  44
+when 295 then  45
+when 294 then  46
+when 289 then  47
+when 290 then  48
+when 354 then  49
+when 357 then  50
+when 358 then  51
+when 359 then  52
+when 360 then  53
+when 361 then  54
+when 363 then  55
+when 362 then  56
+when 364 then  57
+when 365 then  58
+when 366 then  59
+when 367 then  60
+when 368 then  61
+when 369 then  62
+when 370 then  63
+when 371 then  64
+when 372 then  65
+when 355 then  66
+when 356 then  67
+when 250 then  68
+when 251 then  69
+when 284 then  70
+when 400 then  71
+when 230 then  72
+when 427 then  73
+when 306 then  74
+when 415 then  75
+when 219 then  76
+when 220 then  77
+when 218 then  78
+when 234 then  79
+when 406 then  80
+when 416 then  81
+when 435 then  82
+when 404 then  83
+when 409 then  84
+when 408 then  85
+when 407 then  86
+when 422 then  87
+when 411 then  88
+when 412 then  89
+when 410 then  90
+when 413 then  91
+when 379 then  92
+when 380 then  93
+when 381 then  94
+when 382 then  95
+when 383 then  96
+when 384 then  97
+when 385 then  98
+when 386 then  99
+when 387 then 100
+when 213 then 101
+when 214 then 102
+when 335 then 103
+when 336 then 104
+when 338 then 105
+when 340 then 106
+when 341 then 107
+when 342 then 108
+when 334 then 109
+when 339 then 110
+when 377 then 111
+when 337 then 112
+when 378 then 113
+when 343 then 114
+when 417 then 115 else null end EODSEQ,
+pss.M_REF PSREF,
+rtrim(pss.M_NAME) as SCRIPT, rtrim(pss.M_DESC) as DESCRIPTION,
+rtrim(pss.M_NAME) SCR,
+psi.M_ORDER as PSSORD, 
+case psi.M_PERIOD
+when 1 then 'Daily'
+when 2 then 'Weekly' 
+when 3 then 'Monthly'
+when 4 then 'Yearly' end as FRQ,
+case rtrim(psi.M_UNIT)
+when 'ACCCOPY-FX'			then 'EOD.ACCOUNTING.FIXING.FX.UPDATE'
+when 'ACCEOD-ACCEPT'		then 'EOD.ACCOUNTING.MANUALENTRIES.ACCEPT'
+when 'ACCEOD-BAL'			then 'EOD.ACCOUNTING.BALANCE.GENERATION'
+when 'ACCMNT_AUD_DP'		then 'ACCOUNT.MAINTENANCE_DEPENDENCY_OBJECTS_AUDIT'
+when 'ACCMNT_MAINT'			then 'ACCOUNT.MAINTENANCE'
+when 'ACCMNT_MV_DATE'		then 'ACCOUNT.ENTITY_INVENTORY_DATE_MOVE'
+when 'ACCMNT_PURGE'			then 'ACCOUNT.OFFLINE_DATASET_STOP_PURGE'
+when 'ACCUNDO-FLW'			then 'ADMINISTRATION.ACCOUNTING.ENTRYUNDO.SETTLEMENT'
+when 'ACGBALREVERT'			then 'EOD.ACCOUNTING.BALANCE.REVERT'
+when 'ACGHDG'				then 'EOD.ACCOUNTING.ENTRY.GENERATION.HEDGE'
+when 'ACGHDGINTR'			then 'EOD.ACCOUNTING.ENTRY.GENERATION.HEDGE.INTRINSIC'
+when 'ACGHDGREVERT'			then 'EOD.ACCOUNTING.ENTRY.REVERT.HEDGE'
+when 'ACGMOVEDATE'			then 'EOD.ACCOUNTING.MOVEDATE'
+when 'ACGMOVELIMDATE'		then 'EOD.ACCOUNTING.MOVE_LIMITATION_DATE'
+when 'ACGPOS'				then 'EOD.ACCOUNTING.ENTRY.GENERATION.POSITION'
+when 'ACGPOSREVERT' 		then 'EOD.ACCOUNTING.ENTRY.REVERT.POSITION'
+when 'ACGREVERT'			then 'EOD.ACCOUNTING.ENTRY.REVERT.TRADE'
+when 'ACGTRDINTR'			then 'EOD.ACCOUNTING.ENTRY.GENERATION.TRADE.INTRINSIC'
+when 'ACGTRDREVAL'			then 'EOD.ACCOUNTING.ENTRY.GENERATION.TRADE.REVALUATION'
+when 'ACGTRDREVALALL'		then 'EOD.ACCOUNTING.ENTRY.REGENERATION.TRADE.REVAL'
+when 'ACGUNDO'				then 'EOD.ACCOUNTING.UNDO.GLOBAL'
+when 'AM.FUND.NAV.STORAGE'	then 'AM.FUND.NAV.STORAGE' 
+when 'AUTO-FIX'				then 'EVENT.AUTOMATION.FIXING'
+when 'AUTO-MODIFY-FIX'		then 'EVENT.AUTOMATION.MODIFYFIXING'
+when 'AUTO_CASH_SETTL'		then 'EOD.PCENTER.AUTOMATIC_SETTLEMENT.CASH'
+when 'AUTO_SEC_SETTL'		then 'EOD.PCENTER.AUTOMATIC_SETTLEMENT.SECURITY'
+when 'BATCH-PRINT'			then 'DATAMART.REPORTING.MREPORT'
+when 'BENCHMARK.ASCII_READ'	then 'BENCHMARK.ASCII_READ'
+when 'BENCHMARK.VALUATION'	then 'BENCHMARK.VALUATION'
+when 'BULK-EXERCISE'		then 'EVENT.AUTOMATION.BULKEXERCISE'
+when 'CASH ROLL OVER'		then 'PL.FUNDING.ROLLOVER'
+when 'CASH TRANSFER'		then 'PL.CASHTRANSFER'      
+when 'CLOSE-DOWN'			then 'EOD.PCENTER.CLOSEDOWN'
+when 'DB-CHECK'				then 'EOD.DATAMODEL.SQLCHECK'
+when 'DLV_GENERATION'		then 'EOD.PCENTER.UPDATE.DLV_GENERATION'
+when 'DLV_INSPECTION'		then 'EOD.PCENTER.UPDATE.DLV_INSPECTION'
+when 'DLV_INS_GEN'			then 'EOD.PCENTER.UPDATE.DLV_INS_GEN'
+when 'ENTITY-EOD'			then 'EOD.PCENTER.ENTITYEOD'
+when 'EOD-DM-REFRESH'		then 'EOD.PCENTER.DATAMART.REFRESH'
+when 'EOD-MD-REFRESH'		then 'EOD.PCENTER.MARKETDATA.REFRESH'
+when 'EOD-SD-REFRESH'		then 'EOD.PCENTER.STATICDATA.REFRESH'
+when 'EOD-TRADES-CHECK'		then 'EOD.PCENTER.TRADES.CHECK' 
+when 'EOD_PCENTER_EVENT_OR'	then 'EOD.PCENTER.EVENT.ORDER.CANCEL'
+when 'EOD.PCENTER.EVENT.BU'	then 'EOD.PCENTER.EVENT.BULK'
+when 'FG.EXPORT.MDCS'		then 'FIXING.EXPORT.CONTRIBUTIONSERVICE'
+when 'FG.IMPORT.MDCS'		then 'FIXING.IMPORT.CONTRIBUTIONSERVICE'
+when 'FIXING-CHECK'			then 'EVENT.AUTOMATION.FIXINGCHECK'
+when 'FIXING.ENGINE.COPY'	then 'FIXING.ENGINE.COPY'
+when 'FLOW NETTING'			then 'EOD.PCENTER.FLOW.NETTING'
+when 'FODESK-EOD'			then 'EOD.FODESK.DATE.MOVE'
+when 'FUTURE FLOW SELL DOW'	then 'PL.FUTUREFLOWSELLDOWN'
+when 'FX BACKUP'			then 'EOD.FODESK.POSITIONREPOSITORY.FXBACKUP'
+when 'FX CLOSING'			then 'EOD.PCENTER.POSITIONREPOSITORY.FXCLOSING'
+when 'FX CLOSING SANITY CH'	then 'EOD.PCENTER.POSITIONREPOSITORY.FXCLOSINGSANITYCHEC'
+when 'FX WAREHOUSE START'	then 'EOD.FODESK.POSITIONREPOSITORY.STARTFXENGINE'
+when 'FX WAREHOUSE STOP'	then 'EOD.FODESK.POSITIONREPOSITORY.STOPFXENGINE'
+when 'GLOBAL EXPIRY'		then 'EOD.PCENTER.EVENT.TERMINATION'
+when 'GLOBAL NETTING'		then 'EOD.PCENTER.EVENT.NETTING'
+when 'HDG-CALC-FV'			then 'EOD.HEDGE.CALCULATION.FAIRVALUE'
+when 'HDG-GEN-FV-BE'		then 'EOD.HEDGE.GENERATION.BUSINESSEVENTS.FAIRVALUE'
+when 'HDG-RECALC-FV'		then 'EOD.HEDGE.RECALCULATION.FAIRVALUE'
+when 'HEDGE-EFFECT'			then 'EOD.HEDGE.RETROSPECTIVE'
+when 'HEDGE-PROSPECTIVE'	then 'EOD.HEDGE.PROSPECTIVE'
+when 'LATE-TRADING-CLOSE'	then 'EOD.PCENTER.LATETRADING.END'
+when 'LATE-TRADING-OPEN'	then 'EOD.PCENTER.LATETRADING.START'   
+when 'LIMITS LTS'			then 'LIMITS.LTS.PROCESSINGSCRIPTS'
+when 'LIMIT-COPY'			then 'EOD.MLC.ENGINE.COPY'
+when 'LIMIT-MVDATE'			then 'EOD.MLC.DATE.MOVE'
+when 'LIMIT-RESET'			then 'EOD.MLC.RESET'
+when 'LIMIT-RESET-MLC'		then 'EOD.MLC.RESET.DATAMART.UPLOAD'
+when 'LIMIT-RESET-MX'		then 'EOD.MLC.RESET.DATAMART.REFRESH'
+when 'LISTED FX IMPORT CLO'	then 'MARKETDATA.LISTED.FX_IMPORT_CLOSING_PRICE'
+when 'MD-COPY'				then 'MARKETDATA.COPY'
+when 'MD-DIV-CLEAN'			then 'MARKETDATA.DIV.CLEAN'
+when 'MD-PURGE'				then 'MARKETDATA.PURGE'
+when 'MD.EXPORT.MDCS'		then 'MARKETDATA.EXPORT.CONTRIBUTIONSERVICE'
+when 'MD.IMPORT.MDCS'		then 'MARKETDATA.IMPORT.CONTRIBUTIONSERVICE'
+when 'MESSAGE-NOTIFICATION'	then 'MESSAGE.NOTIFICATION'
+when 'MHtRn46485'			then 'EOD.PCENTER.CORPORATE.ACTIONS.PROPAGATION'
+when 'MoUJG65854'			then 'EOD.CASH.ADJ.FO.TRADES.GENERATION'
+when 'MPsMM69396'			then 'EOD.CA.HISTORICAL.DATA.UPDATE'
+when 'MP-IMPORT-ASCII'		then 'MARKETDATA.IMPORT.ASCII'
+when 'MREPORTS_EXECUTE'		then 'MREPORTS.EXECUTE'
+when 'MTM IMPORT'			then 'PL.IMPORT.MTM.ASCII'
+when 'MTpZo62416'			then 'ACCOUNT.CA_PROPAGATION_ENTRIES_AUDIT'
+when 'MuBxr59796'			then 'EOD.PCENTER.CORPORATE.ACTIONS.INSERTION'
+when 'MxQNB61060'			then 'EOD.CA.FO.TRADES.GENERATION'
+when 'P&L SELL DOWN'		then 'PL.SELLDOWN'
+when 'PAY_FIX_RETRY'		then 'EOD.PCENTER.UPDATE.SETTLEMENTFIXING_WINDOW_RETRY'
+when 'PAY_FIX_WINDOW'		then 'EOD.PCENTER.UPDATE.SETTLEMENTFIXING_WINDOW'
+when 'PHISICAL-PURGE'		then 'ADMINISTRATION.AUTOMATION.PHYSICALPURGE'
+when 'PL-ENGINE'			then 'EOD.ACCOUNTING.ECONOMICEVENT.PL'
+when 'PLCCENTER-EOD'		then 'EOD.PLCCENTER.DATE.MOVE'
+when 'POSITIONCLEANUP'		then 'ADMINISTRATION.POSITIONREPOSITORY.CLEANUP'
+when 'POSITIONREPAIR'		then 'ADMINISTRATION.WAREHOUSE.POSITIONREPAIR'
+when 'PROCESSING-EOD'		then 'EOD.PCENTER.DATE.MOVE'
+when 'PURGE'				then 'ADMINISTRATION.AUTOMATION.LOGICALPURGE'
+when 'REP_BATCHES_EXT'		then 'DATAMART.REPORTING.BATCHES.EXTRACTIONS'
+when 'REP_BATCHES_FEED'		then 'DATAMART.REPORTING.BATCHES.FEEDERS'
+when 'REP_JOB_PURGE'		then 'ADMINISTRATION.DATAMART.PURGE.JOB'
+when 'REP_PURGE_RULE'		then 'ADMINISTRATION.DATAMART.PURGE'
+when 'SAVE-FUT-CLOSING'		then 'SAVE-FUT-CLOSING'
+when 'SINGLE FX CLOSING'	then 'EOD.FODESK.POSITIONREPOSITORY.FXCLOSING'
+when 'TRADES-ACCEPT'		then 'EOD.PCENTER.TRADES.ACCEPT'
+when 'UNDO-CLOSE-DOWN'		then 'EOD.PCENTER.CLOSEDOWN.UNDO'
+when 'UNDO-ENTITY-EOD'		then 'EOD.PCENTER.ENTITYEOD.UNDO'
+when 'VAR BATCH BY PTF'		then 'EOD.VAR'
+when 'VOLX SCRIPT_COM'		then 'MARKETDATA.VOLX.MANAGEMENT.COMMODITY'
+when 'VOLX SCRIPT_EQD'		then 'MARKETDATA.VOLX.MANAGEMENT.EQUITY'
+when 'VOLX SCRIPT_FUTURE'	then 'MARKETDATA.VOLX.MANAGEMENT.FUTURE'
+when 'VOLX SCRIPT_IRD_CF'	then 'MARKETDATA.VOLX.MANAGEMENT.IRD.CAPFLOORS'
+when 'VOLX SCRIPT_IRD_OSWP'	then 'MARKETDATA.VOLX.MANAGEMENT.IRD.SWAPTIONS'
+when 'WAREHOUSE FX MAINTEN'	then 'EOD.FODESK.POSITIONREPOSITORY.FXMAINTENANCE'
+when 'WAREHOUSE MAINTENANC'	then 'EOD.FODESK.POSITIONREPOSITORY.MAINTENANCE'
+when 'WAREHOUSE START'		then 'EOD.FODESK.POSITIONREPOSITORY.STARTENGINE'
+when 'WAREHOUSE STOP'		then 'EOD.FODESK.POSITIONREPOSITORY.STOPENGINE'
+when 'WAREHOUSE.BUILD'		then 'ADMINISTRATION.WAREHOUSE.REBUILD'     
+end as UNIT,
+case rtrim(psi.M_UNIT)
+when 'ACGUNDO'              then 'Shifter: '||rtrim(par.M_SHIFTER)
+when 'BATCH-PRINT'          then 'Batch: '||rtrim(psi.M_PARAM_LAB1)
+when 'FLOW NETTING'         then 'Shifter: '||rtrim(par.M_SHIFTER)
+when 'EOD.PCENTER.EVENT.BU' then 'Event: '||rtrim(clas.M_NAME)
+when 'GLOBAL EXPIRY'        then 'Shifter: '||rtrim(par.M_SHIFTER)
+when 'MD-COPY'              then 'Source:'||rtrim(mdss.M_LABEL)
+when 'MD.IMPORT.MDCS'       then 'Dataset: '||rtrim(psi.M_PARAM_LAB1)
+when 'PROCESSING-EOD'       then case par.M_NO_OVERWT when 0 then 'Overwrite MD' when 1 then 'No overwrite MD' end
+when 'PLCCENTER-EOD'        then case par.M_NO_OVERWT when 0 then 'Overwrite MD' when 1 then 'No overwrite MD' end
+when 'PURGE'                then 'Shifter: '||rtrim(par.M_SHIFTER)
+when 'REP_BATCHES_EXT'      then 'Batch: '||rtrim(psi.M_PARAM_LAB2) 
+when 'REP_BATCHES_FEED'     then 'Batch: '||rtrim(psi.M_PARAM_LAB2)
+else null end as ARG01,
+case rtrim(psi.M_UNIT)
+when 'BATCH-PRINT'          then 'Shifter: '||rtrim(psi.M_PARAM_SHFT)
+when 'EOD.PCENTER.EVENT.BU' then 'Filter: '||rtrim(par.M_FILTER_LBL)
+when 'FLOW NETTING'         then 'Key: '||rtrim(par.M_KEY_LBL)
+when 'GLOBAL EXPIRY'        then 'Filter: '||rtrim(par.M_FILTER_LBL)
+when 'MD.IMPORT.MDCS'       then 'Rule: '||rtrim(mdcs.M_LABEL)
+when 'MD-COPY'              then 'Target:'||
+case mditm.M_DEST_TYPE 
+when 0 then '[MDS] '
+when 1 then '[HIS] '
+when 2 then '[ON] ' end ||rtrim(mdst.M_LABEL)
+when 'PHISICAL-PURGE'       then 'Filter: '||rtrim(par.M_FILTER_LBL)
+when 'PURGE'                then 'Filter: '||rtrim(par.M_FILTER_LBL)
+when 'REP_BATCHES_EXT'      then 'Entity: '||rtrim(psi.M_PARAM_LAB3)
+when 'REP_BATCHES_FEED'     then 'Entity: '||rtrim(psi.M_PARAM_LAB3)
+else null end as ARG02,
+rtrim(fltb.M_FMLA_TEXT) as FILTR
+
+from PROCESS#PS_ITEM_DBF psi
+left join PROCESS#PS_SCRPT_DBF pss on psi.M_REF = pss.M_REF
+left join SPB_PS_DBF par on trim(psi.M_PARAM_LAB1) = to_char(par.M_REFERENCE)
+left join CLASS_MAPPING_DBF clas on par.M_OBJECT_ID = clas.M_ID
+left join MD_RTSRH_DBF mdcs on trim(substr(psi.M_PARAM_LAB3,1,2)) = to_char(mdcs.M_REFERENCE)
+left join SFVFLTM_DBF flth on rtrim(par.M_FILTER_LBL) = rtrim(flth.M_LABEL)
+left join SFVFLTS_DBF fltb on flth.M_ID = fltb.M_ID
+left join MD_TEMPL_DBF mdtmp on  trim(psi.M_PARAM_LAB1) = to_char(mdtmp.M_REFERENCE)
+left join MD_ITEML_DBF mditl on mdtmp.M_ITEMS = mditl.M_CTN and mditl.M_REF > 0
+left join MD_ITEM_DBF mditm on mditl.M_REF = mditm.M_REFERENCE
+left join TRN_MDS_DBF mdss on  mditm.M_SOURCE = mdss.M_REFERENCE
+left join TRN_MDS_DBF mdst on  mditm.M_DEST = mdst.M_REFERENCE
+
+where 1 = 1
+and rtrim(psi.M_UNIT) in ('REP_BATCHES_EXT','REP_BATCHES_FEED')
+and pss.M_REF in 
+(
+123, 166, 167, 213, 214, 218, 219, 220, 230, 234, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259,
+260, 264, 267, 269, 270, 271, 272, 273, 274, 276, 279, 284, 287, 288, 289, 290, 291, 292, 293, 294, 
+295, 296, 298, 299, 301, 302, 306, 327, 328, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 
+354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 377, 
+378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 391, 392, 393, 394, 395, 396, 399, 400, 401, 
+404, 406, 407, 408, 409, 410, 411, 412, 413, 415, 416, 417, 422, 427, 435
+)
+
+order by EODSEQ, SCRIPT, PSSORD, UNIT

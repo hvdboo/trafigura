@@ -1,0 +1,14 @@
+select 
+rep.M_TRN_FMLY FML, rep.M_TRN_GRP GRP, rep.M_TRN_TYPE TYP,
+rep.M_INSTRUMENT INS, rep.M_C_CUR_PL CUR,
+to_char(rep.M_TP_DTEEXP,'YYYYMMDD') EXP, rep.M_TP_STRIKE STK, rep.M_TP_CP RGT,
+rep.M_TP_STATUS2 STAT,
+rep.M_TP_LENTDSP LE,
+rep.M_TP_PFOLIO PFL,
+rep.M_C_CUR_PL CUR,
+rep.M_PL_GEPL2 PL_GE,
+rep.M_PL_PC_FIN2 PL_CS_FIN,
+rep.M_PL_FP_FIN2 PL_FP_FIN, 
+rep.M_PL_MV_FIN2 PL_MV_FIN
+from MUREX_DM_OWNER.TRAF_TDLPTE_REP rep
+-- left join MUREX_MX_OWNER.MPX_SPOT_DBF sptc on (rep.C_CUR_PL = sptc.M_DEN and to_char(sptc.M__DATE_,'YYYYMMDD') = '20171005' and sptc.M__ALIAS_ = 'LANA MDS')

@@ -1,0 +1,39 @@
+select 
+rtrim(lut.M_LABEL) LUT, 
+rtrim(hdr.M_LABEL) FOLDER,
+rtrim(M_DGPTYPE) TYP,
+rtrim(M_DGMODEL) MODEL,
+rtrim(M_DGPUBLICAT) PUB,
+'>' TGT,
+rtrim(M_DGMXLABEL) MX_LAB,
+rtrim(M_MATURITY) MAT,
+rtrim(M_DGSEP) SEP,
+rtrim(M_DGMATFOR) MATFRM,
+rtrim(M_DGPRICECOL) PRCCOL,
+rtrim(M_DGARCHGRP) ARCGRP,
+rtrim(M_DGQLABEL)  QOT,
+rtrim(M_DGDIVIDE)  DIV,
+rtrim(M_DGFORMULA) FRM,
+rtrim(M_DGFOLDER)  FOLDER,
+rtrim(M_DGCMPSITE) COMPO,
+rtrim(M_DGPUBDATE) PUBDAT
+
+from UDTB274_DBF tbl
+left join UDTH274_DBF hdr on tbl.M__INDEX_ = hdr.M__INDEX_
+left join RTG_TYP_DBF lut on lut.M_HEADER = 'UDTH274'
+
+/*
+where rtrim(M_DGMXLABEL) in
+(
+'CT RCB API4 O122_ICE',
+'CT RCB API4 O305_ICE',
+'GG CCA SV OPT_ICE',
+'GG CCA VI 23 OEE_ICE',
+'GG CCA VI OPT_ICE',
+'GG EUA OEE_ICE',
+'GG EUA OPF_ICE',
+'GG RGGI OPT_ICE',
+'GG RGGI V23 OEE_ICE',
+'NG NL.TTF OPE_ICE'
+)
+*/

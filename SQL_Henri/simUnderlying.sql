@@ -1,0 +1,1 @@
+select * from SRC_DESC_DBF where trim(M_TABLE) is not null 

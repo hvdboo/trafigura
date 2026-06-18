@@ -1,0 +1,13 @@
+select 
+rtrim(tag.M_LABEL) TAG,
+lnk.M_TRADE_ORIGIN TRN
+
+from TRN_TAG_J_DBF lnk
+left join TRN_TAG_DBF tag on lnk.M_TAG_REFERENCE = tag.M_REFERENCE
+
+order by TAG, TRN
+
+/*
+insert into TRN_TAG_J_DBF (M_IDENTITY,M_TAG_REFERENCE,M_TRADE_ORIGIN) values (27,6,55686338);
+insert into TRN_TAG_J_DBF (M_IDENTITY,M_TAG_REFERENCE,M_TRADE_ORIGIN) values (28,6,54400721);
+*/

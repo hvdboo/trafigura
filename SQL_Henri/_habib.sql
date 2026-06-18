@@ -1,0 +1,21 @@
+select * from RDBCNSTR_DBF 
+select * from RDB_OBJECT_DBF
+SELECT TNAME FROM TAB WHERE TNAME LIKE 'RDB%'
+ 
+select * from RDB_CLASS_DBF
+select * from RDBUNID_DBF
+select * from RDBREQ_DBF
+select * from RDBMXNDX_DBF
+select * from RDBMXCRT_DBF
+select * from RDBINDEX_DBF
+select * from RDBCSNDX_DBF
+select * from RDBCSCRT_DBF
+select * from RDBCNSTR_KEY_DBF
+select * from RDBCNSTR_EXTEND_FK_DBF
+select * from RDBCNSTR_EXTEND_DBF
+select * from RDBCNSTR_EXTEND_COLUMN_DBF
+select * from RDBCNSTR_DBF
+select * from RDBCNSCI_ENUM_REQUEST_DBF
+select * from RDBCNSCI_ENUM_DBF
+select * from RDBCNSCI_DBF WHERE M_TABLE_NAME IN ('RT_LOAN_DBF ','RT_INSGN_DBF ','RT_LNGN_DBF','RT_INDEX_DBF','CM_MKTSR_DBF')
+RDBCHKP_DBF

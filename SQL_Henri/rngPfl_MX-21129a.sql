@@ -1,0 +1,8 @@
+select
+M_COD  COD,
+M_DES  DES,
+M_GUID GUID,
+M_OBJ  OBJ
+
+from TABLE#LIST#SRD_DBF
+order by OBJ, COD 

@@ -1,0 +1,1 @@
+select * from MXMLEX_TASK_CFG_TABLE

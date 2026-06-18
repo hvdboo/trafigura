@@ -1,0 +1,86 @@
+select 
+to_char(invaud.M_DATE,'YYYY-MM-DD') AUD_DAT, 
+to_char(floor(invaud.M_TIME/3600),'FM09')||':'||to_char(floor(mod(invaud.M_TIME,3600)/60),'FM09')||':'||to_char(mod(mod(invaud.M_TIME,3600),60),'FM09') AUD_TIM,
+invaud.M_CONTRACT_ORIGIN_REF CNT, trn.M_NB TRN, 
+case invaud.M_OLD_STATUS
+when 0 then 'Blacklisted'
+when 1 then '?'
+when 2 then 'Contribution' else null end STAT_OLD,
+case invaud.M_NEW_STATUS
+when 0 then 'Blacklisted'
+when 1 then '?'
+when 2 then 'Contribution' else null end STAT_NEW
+
+from INV_CONT_AUDIT_DBF invaud
+left join TRN_HDR_DBF trn on invaud.M_CONTRACT_ORIGIN_REF = trn.M_CONTRACT
+
+where 
+-- trn.M_TRN_GTYPE = 102 
+-- and to_char(trn.M_TRN_EXP,'YYYY-MM-DD') > '2019-09-01'
+-- and to_char(trn.M_TRN_EXP,'YYYY-MM-DD') < '2019-10-01'
+trn.M_NB in
+(
+12935030,
+12935030,
+13042847,
+13044395,
+13044395,
+13070782,
+13070786,
+13084371,
+13173582,
+13173586,
+13181722,
+13181722,
+13182197,
+13182209,
+13183649,
+13183649,
+13183934,
+13183938,
+13206585,
+13206589,
+13212948,
+13212952,
+13217850,
+13217850,
+13322353,
+13322357,
+13322395,
+13322399,
+13343416,
+13343420,
+13355337,
+13355341,
+13396692,
+13396696,
+13404318,
+13404322,
+13418568,
+13418572,
+13418574,
+13418578,
+13418621,
+13418625,
+13440049,
+13440053,
+13440061,
+13440065,
+13440592,
+13458795,
+13458799,
+13542320,
+13542324,
+13572152,
+13580114,
+13603405,
+13611884,
+13611888,
+13628702,
+13628706
+)
+
+
+
+
+order by CNT, AUD_DAT, AUD_TIM

@@ -1,0 +1,21 @@
+select distinct
+case itm.M_UNIT
+when 'REP_BATCHES_FEED' then 'Batch of Feeders'
+when 'REP_BATCHES_EXT'  then 'Batch of Extractions' end as SCR_TYP,
+rtrim(scr.M_NAME) SCR_LAB, rtrim(scr.M_DESC) SCR_DES,
+rtrim(bat.M_LABEL) BAT_LAB, rtrim(bat.M_DESC) BAT_DES,
+rtrim(itm.M_PARAM_LAB3) ENT,
+bat.M_REF BREF
+from PROCESS#PS_SCRPT_DBF scr, PROCESS#PS_ITEM_DBF itm, ACT_SET_DBF bat 
+where scr.M_REF = itm.M_REF and itm.M_PARAM_LAB2 = bat.M_LABEL 
+and (itm.M_UNIT = 'REP_BATCHES_EXT'  or itm.M_UNIT = 'REP_BATCHES_FEED')
+and scr.M_REF in
+(
+123, 166, 167, 213, 214, 218, 219, 220, 230, 234, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259,
+260, 264, 267, 269, 270, 271, 272, 273, 274, 276, 279, 284, 287, 288, 289, 290, 291, 292, 293, 294, 
+295, 296, 298, 299, 301, 302, 306, 327, 328, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 
+354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 377, 
+378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 391, 392, 393, 394, 395, 396, 399, 400, 401, 
+404, 406, 407, 408, 409, 410, 411, 412, 413, 415, 416, 417, 422, 427, 435
+)
+order by SCR_TYP, SCR_LAB

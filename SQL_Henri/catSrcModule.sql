@@ -1,0 +1,8 @@
+select 
+rtrim (src.M_LABEL) LAB, 
+rtrim(src.M_DESC)   DES
+
+from SRC_MOD_DBF src
+where src.M_REFERENCE = 1 or src.M_REFERENCE > 1001
+
+order by LAB

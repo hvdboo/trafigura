@@ -1,0 +1,12 @@
+select 
+trim(M_DGPTYPE) as PRODTYPE, 
+trim(M_DGMODEL) as TICKER, 
+trim(M_DGPUBLICAT) as PUBLICATION,
+trim(M_DGSGRLABEL) as LABEL, 
+trim(M_DGTENOR) as TENOR, 
+trim(M_DGSEP) as SEPARATOR, 
+trim(M_DGMATFOR) as MATFORM,
+trim(M_DGPRICECOL) as PRICECOL, 
+trim(M_DGFOLDER) as FOLDER 
+
+from UDTB270_DBF 
