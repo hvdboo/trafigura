@@ -145,10 +145,10 @@ when 3 then null
 when 4 then null
 when 6 then coalesce(rtrim(undnbyqot.M_TRAD_SMB), rtrim(undnbyfccqot.M_TRAD_SMB), rtrim(undnbyfcsqot.M_TRAD_SMB)) else null end ICMSYM,
 case und.M_RESET
-when 0 then rtrim(undicmviw.M_HSR) 
+when 0 then rtrim(undicmviw.M_HSRDFL) 
 when 3 then null
 when 4 then null
-when 6 then coalesce(rtrim(undnbyicmviw.M_HSR), rtrim(undnbyfccicmviw.M_HSR), rtrim(undnbyfcsicmviw.M_HSR)) else null end ICMHSR,
+when 6 then coalesce(rtrim(undnbyicmviw.M_HSRDFL), rtrim(undnbyfccicmviw.M_HSRDFL), rtrim(undnbyfcsicmviw.M_HSRDFL)) else null end ICMHSRDFL,
 case und.M_RESET
 when 0 then rtrim(undicmviw.M_CAL) 
 when 3 then null
@@ -243,22 +243,22 @@ left join CM_MKTSR_DBF hsr on rtrim(substr(ind.M_UNDRL_FORMULA,2,8)) = to_char(h
 left join CM_INDEX_DBF undicm on und.M_COM_IND = undicm.M_REFERENCE
 left join CMC_QUOT_DBF undqot on und.M_COM_QUOT = undqot.M_REFERENCE
 left join CM_MKT_DBF   undpub on undqot.M_PUBLI = undpub.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undicmviw on undicm.M_REFERENCE = undicmviw.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undicmviw on undicm.M_REFERENCE = undicmviw.M_ICMUID
 left join CM_FUT_DBF   undnbyfcm on (und.M_COM_FUT = undnbyfcm.M_REFERENCE and und.M_COM_NBY_T = 0 and undnbyfcm.M_LISTED in (1,2,16,32))
 left join RT_INSGN_DBF undnbyfccins on (undnbyfcm.M_CM_INSTR = undnbyfccins.M_GEN_NUM and undnbyfcm.M_INS_MODE = 0)
 left join RT_LNGN_DBF  undnbyfccgen on (undnbyfcm.M_CM_INSTR = undnbyfccgen.M_GEN_NUM and undnbyfcm.M_INS_MODE = 0)
 left join RT_INDEX_DBF undnbyfccind on undnbyfccgen.M_INDEX0 = undnbyfccind.M_INDEX
 left join CM_INDEX_DBF undnbyfccicm on undnbyfccind.M_COM_IND = undnbyfccicm.M_REFERENCE
 left join CMC_QUOT_DBF undnbyfccqot on undnbyfccind.M_COM_QUOT = undnbyfccqot.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfccicmviw on undnbyfccicm.M_REFERENCE = undnbyfccicmviw.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfccicmviw on undnbyfccicm.M_REFERENCE = undnbyfccicmviw.M_ICMUID
 left join CMC_MGEN_DBF undnbyfcsgen on (undnbyfcm.M_CM_INSTR = undnbyfcsgen.M_REFERENCE and undnbyfcm.M_INS_MODE = 1)
 left join RT_INDEX_DBF undnbyfcsind on undnbyfcsgen.M_INDEX = undnbyfcsind.M_INDEX
 left join CM_INDEX_DBF undnbyfcsicm on undnbyfcsind.M_COM_IND = undnbyfcsicm.M_REFERENCE
 left join CMC_QUOT_DBF undnbyfcsqot on undnbyfcsind.M_COM_QUOT = undnbyfcsqot.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfcsicmviw on undnbyfcsicm.M_REFERENCE = undnbyfcsicmviw.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfcsicmviw on undnbyfcsicm.M_REFERENCE = undnbyfcsicmviw.M_ICMUID
 left join CM_INDEX_DBF undnbyicm on (und.M_COM_FUT = undnbyicm.M_REFERENCE and und.M_COM_NBY_T = 2)
 left join CMC_QUOT_DBF undnbyqot on (und.M_COM_QUOT = undnbyqot.M_REFERENCE and und.M_COM_NBY_T = 2)
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyicmviw on undnbyicm.M_REFERENCE = undnbyicmviw.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyicmviw on undnbyicm.M_REFERENCE = undnbyicmviw.M_ICMUID
 
 where 1 = 1 
 and ind.M_CATEGORY = 8 

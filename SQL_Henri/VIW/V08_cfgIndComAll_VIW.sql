@@ -40,19 +40,18 @@ M_BSKINDLAB2,
 M_BSKINDHSR2,
 M_BSKRNDRUL2,
 M_BSKRNDDEC2,
-M_CRVICM0,
-M_CRVQOT0,
-M_CRVPUB0,
-M_CRVSYM0,
-M_CRVHSR0,
-M_CRVCAL0,
-M_CRVOBJ0,
-M_CRVICM1,
-M_CRVQOT1,
-M_CRVPUB1,
-M_CRVSYM1,
-M_CRVHSR1,
-M_CRVCAL1,
+M_ROTICM0,
+M_ROTQOT0,
+M_ROTPUB0,
+M_ROTSYM0,
+M_ROTHSR0,
+M_ROTCAL0,
+M_ROTICM1,
+M_ROTQOT1,
+M_ROTPUB1,
+M_ROTSYM1,
+M_ROTHSR1,
+M_ROTCAL1,
 M_PHYLAB,
 M_LOCLAB,
 M_HIS,
@@ -62,7 +61,6 @@ M_QOTUID,
 M_UNDNDX,
 M_UNDUID,
 M_ICMUID,
-M_CRVUID,
 M_PHYUID,
 M_LOCUID
 )
@@ -290,7 +288,7 @@ case when ind.M_CATEGORY = 8 and ind.M_RESET = 4 then bsk.M_INDLAB2 else null en
 case when ind.M_CATEGORY = 8 and ind.M_RESET = 4 then bsk.M_HSR2    else null end BSKINDHSR2,
 case when ind.M_CATEGORY = 8 and ind.M_RESET = 4 then bsk.M_RNDRUL2 else null end BSKRNDRUL2,
 case when ind.M_CATEGORY = 8 and ind.M_RESET = 4 then bsk.M_RNDDEC2 else null end BSKRNDDEC2,
--- CURVE
+-- ROOTS
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -302,7 +300,7 @@ when 8 then
         when 6 then undnby.M_ICMLAB else null end
     when 4 then bsk.M_ICMLAB1
     when 6 then nby.M_ICMLAB else null end 
-when 9 then fwd.M_FCMLAB end CRVICM0,
+when 9 then fwd.M_FCMLAB end ROTICM0,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -314,7 +312,7 @@ when 8 then
         when 6 then undnby.M_ICMQOT else null end
     when 4 then bsk.M_ICMQOT1
     when 6 then nby.M_ICMQOT else null end 
-when 9 then fwd.M_QOTLAB end CRVQOT0,
+when 9 then fwd.M_QOTLAB end ROTQOT0,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -322,7 +320,7 @@ when 8 then
     when 3 then coalesce(rtrim(undbsk.M_ICMPUB1), rtrim(avr.M_UNDPUB))
     when 4 then bsk.M_ICMPUB1
     when 6 then nby.M_PUB else null end 
-when 9 then fwd.M_UNDPUB end CRVPUB0,
+when 9 then fwd.M_UNDPUB end ROTPUB0,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -334,19 +332,19 @@ when 8 then
         when 6 then undnby.M_ICMSYM else null end
     when 4 then bsk.M_ICMSYM1
     when 6 then nby.M_ICMSYM else null end 
-when 9 then fwd.M_UNDSYM end CRVSYM0,
+when 9 then fwd.M_UNDSYM end ROTSYM0,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
-    when 0 then spt.M_HSR
+    when 0 then spt.M_HSRDFL
     when 3 then 
         case und.M_RESET
         when 0 then coalesce(avr.M_UNDHSR, avr.M_ICMHSR)
         when 4 then coalesce(undbsk.M_HSR1, undbsk.M_ICMHSR1)
-        when 6 then undnby.M_HSR else null end
+        when 6 then undnby.M_HSRDFL else null end
     when 4 then coalesce(bsk.M_HSR1, bsk.M_ICMHSR1)
-    when 6 then nby.M_HSR else null end 
-when 9 then fwd.M_UNDHSR end CRVHSR0,
+    when 6 then nby.M_HSRDFL else null end 
+when 9 then fwd.M_UNDHSR end ROTHSR0,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -354,19 +352,7 @@ when 8 then
     when 3 then coalesce(rtrim(undbsk.M_ICMCAL1), rtrim(avr.M_UNDCAL))
     when 4 then bsk.M_ICMCAL1
     when 6 then nby.M_CAL else null end 
-when 9 then fwd.M_UNDCAL end CRVCAL0,
-case ind.M_CATEGORY
-when 8 then 
-    case ind.M_RESET
-    when 0 then spt.M_CRVOBJ
-    when 3 then 
-        case und.M_RESET
-        when 0 then undspt.M_CRVOBJ
-        when 4 then undbskspt1.M_CRVOBJ
-        when 6 then undnbyspt.M_CRVOBJ else null end
-    when 4 then bskspt1.M_CRVOBJ
-    when 6 then nbyspt.M_CRVOBJ else null end 
-when 9 then fcmspt.M_CRVOBJ end CRVOBJ0,
+when 9 then fwd.M_UNDCAL end ROTCAL0,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -376,7 +362,7 @@ when 8 then
         when 4 then undbsk.M_ICMLAB2 
         when 6 then null else null end
     when 4 then bsk.M_ICMLAB2 else null end
-when 9 then null end CRVICM1,
+when 9 then null end ROTICM1,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -384,7 +370,7 @@ when 8 then
         case und.M_RESET
         when 4 then undbsk.M_ICMQOT2 else null end
     when 4 then bsk.M_ICMQOT2 else null end
-when 9 then null end CRVQOT1,
+when 9 then null end ROTQOT1,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -394,7 +380,7 @@ when 8 then
        when 4 then undbsk.M_ICMPUB2 else null end
     when 4 then bsk.M_ICMPUB2
     when 6 then null else null end 
-when 9 then null end CRVPUB1,
+when 9 then null end ROTPUB1,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -402,8 +388,7 @@ when 8 then
         case und.M_RESET
         when 4 then undbsk.M_ICMSYM2 else null end
     when 4 then bsk.M_ICMSYM2 else null end
-when 9 then null end CRVSYM1,
-
+when 9 then null end ROTSYM1,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -411,7 +396,7 @@ when 8 then
        case und.M_RESET
        when 4 then coalesce(undbsk.M_HSR2, undbsk.M_ICMHSR2) else null end
     when 4 then coalesce(bsk.M_HSR2, bsk.M_ICMHSR2) else null end 
-when 9 then null end CRVHSR1,
+when 9 then null end ROTHSR1,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -421,7 +406,7 @@ when 8 then
        when 4 then undbsk.M_ICMCAL2 else null end    
     when 4 then bsk.M_ICMCAL2
     when 6 then null else null end 
-when 9 then null end CRVCAL1,
+when 9 then null end ROTCAL1,
 -- DELIVERY
 case ind.M_CATEGORY
 when 8 then 
@@ -480,7 +465,7 @@ when 8 then
         when 3 then null 
         when 4 then undbsk.M_ICMNDX1
         when 6 then undnby.M_ICMNDX else null end
-*/
+*/        
     when 4 then bsk.M_ICMNDX1
     when 6 then nby.M_ICMNDX else null end
 when 9 then null end UNDNDX,
@@ -505,18 +490,6 @@ when 8 then
     when 4 then bsk.M_ICMUID1
     when 6 then nby.M_ICMUID else null end
 when 9 then null end ICMUID,
-case ind.M_CATEGORY
-when 8 then 
-    case ind.M_RESET
-    when 0 then spt.M_CRVUID
-    when 3 then 
-        case und.M_RESET
-        when 0 then undspt.M_CRVUID
-        when 4 then undbskspt1.M_CRVUID
-        when 6 then undnbyspt.M_CRVUID else null end
-    when 4 then bskspt1.M_CRVUID
-    when 6 then nbyspt.M_CRVUID else null end 
-when 9 then fcmspt.M_CRVUID end CRVUID,
 case ind.M_CATEGORY
 when 8 then 
     case ind.M_RESET
@@ -545,25 +518,25 @@ when 8 then
 when 9 then null end LOCUID
 
 from RT_INDEX_DBF ind
-left join RT_GROUP_DBF grp on ind.M_HISFILE = grp.M_HISFILE
-left join CM_ASSET_DBF ass on to_number(ltrim(ind.M_RT_SELAB))= ass.M_REFERENCE
-left join CM_ATYPE_DBF ast on ass.M_TYPE = ast.M_REFERENCE
-left join CM_UNIT_DBF  uod on ind.M_UNIT_REF0 = uod.M_REFERENCE
-left join CM_UNIT_DBF  uoq on ind.M_UNIT_REF1 = uoq.M_REFERENCE
-left join CM_INDEX_DBF icm on ind.M_COM_IND = icm.M_REFERENCE
-left join CMC_QUOT_DBF qot on ind.M_COM_QUOT = qot.M_REFERENCE
-left join CM_MKT_DBF   pub on qot.M_PUBLI = pub.M_REFERENCE
-left join CM_UNIT_DBF  qotuoq on qot.M_UNIT = qotuoq.M_REFERENCE
-left join CM_UNIT_DBF  qotuod on qot.M_QTY_UNIT = qotuod.M_REFERENCE
-left join RT_INDEX_DBF und on ind.M_UNDRL = und.M_INDEX
-left join RT_GROUP_DBF undgrp on und.M_HISFILE = undgrp.M_HISFILE
-left join CM_UNIT_DBF  unduod on und.M_UNIT_REF0 = unduod.M_REFERENCE
-left join CM_UNIT_DBF  unduoq on und.M_UNIT_REF1 = unduoq.M_REFERENCE
-left join CMC_QUOT_DBF undqot on und.M_COM_QUOT = undqot.M_REFERENCE
-left join CM_MKT_DBF   undpub on undqot.M_PUBLI = undpub.M_REFERENCE
-left join CM_UNIT_DBF  undqotuoq on undqot.M_UNIT = undqotuoq.M_REFERENCE
-left join CM_UNIT_DBF  undqotuod on undqot.M_QTY_UNIT = undqotuod.M_REFERENCE
-left join VIW_ICMSPT_DBF spt on ind.M_REFERENCE = spt.M_INDUID and ind.M_CATEGORY = 8 and ind.M_RESET = 0
+left join RT_GROUP_DBF   grp on ind.M_HISFILE = grp.M_HISFILE
+left join CM_ASSET_DBF   ass on to_number(ltrim(ind.M_RT_SELAB))= ass.M_REFERENCE
+left join CM_ATYPE_DBF   ast on ass.M_TYPE = ast.M_REFERENCE
+left join CM_UNIT_DBF    uod on ind.M_UNIT_REF0 = uod.M_REFERENCE
+left join CM_UNIT_DBF    uoq on ind.M_UNIT_REF1 = uoq.M_REFERENCE
+left join CM_INDEX_DBF   icm on ind.M_COM_IND = icm.M_REFERENCE
+left join CMC_QUOT_DBF   qot on ind.M_COM_QUOT = qot.M_REFERENCE
+left join CM_MKT_DBF     pub on qot.M_PUBLI = pub.M_REFERENCE
+left join CM_UNIT_DBF    qotuoq on qot.M_UNIT = qotuoq.M_REFERENCE
+left join CM_UNIT_DBF    qotuod on qot.M_QTY_UNIT = qotuod.M_REFERENCE
+left join RT_INDEX_DBF   und on ind.M_UNDRL = und.M_INDEX
+left join RT_GROUP_DBF   undgrp on und.M_HISFILE = undgrp.M_HISFILE
+left join CM_UNIT_DBF    unduod on und.M_UNIT_REF0 = unduod.M_REFERENCE
+left join CM_UNIT_DBF    unduoq on und.M_UNIT_REF1 = unduoq.M_REFERENCE
+left join CMC_QUOT_DBF   undqot on und.M_COM_QUOT = undqot.M_REFERENCE
+left join CM_MKT_DBF     undpub on undqot.M_PUBLI = undpub.M_REFERENCE
+left join CM_UNIT_DBF    undqotuoq on undqot.M_UNIT = undqotuoq.M_REFERENCE
+left join CM_UNIT_DBF    undqotuod on undqot.M_QTY_UNIT = undqotuod.M_REFERENCE
+left join VIW_ICMSPT_DBF spt on ind.M_REFERENCE = spt.M_INDUID and ind.M_CATEGORY = 8 and ind.M_RESET = 0 
 left join VIW_ICMNBY_DBF nby on ind.M_REFERENCE = nby.M_INDUID and ind.M_CATEGORY = 8 and ind.M_RESET = 6
 left join VIW_ICMSPT_DBF nbyspt on nby.M_ICMUID = nbyspt.M_ICMUID
 left join VIW_ICMBSK_DBF bsk on ind.M_REFERENCE = bsk.M_INDUID and ind.M_CATEGORY = 8 and ind.M_RESET = 4
@@ -577,7 +550,6 @@ left join VIW_ICMNBY_DBF undnby on und.M_REFERENCE = undnby.M_INDUID and und.M_C
 left join VIW_ICMSPT_DBF undnbyspt on undnby.M_ICMUID = undnbyspt.M_ICMUID
 left join VIW_ICMBSK_DBF undbsk on und.M_REFERENCE = undbsk.M_INDUID and und.M_CATEGORY = 8 and und.M_RESET = 4
 left join VIW_ICMSPT_DBF undbskspt1 on undbsk.M_ICMUID1 = undbskspt1.M_ICMUID
---left join LST_PREFV_DBF prficm on rtrim(ind.M_IND_LAB) = rtrim(prficm.M_VALUE) and prficm.M_INDEX2 = 204 
 
 where 1 = 1
 and ind.M_CREAT_MODE = 0

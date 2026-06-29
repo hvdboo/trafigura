@@ -313,11 +313,11 @@ when ind1.M_CATEGORY = 9 then rtrim(fcsicmviw1.M_PUB) else null end ICMPUB1,
 case
 when ind1.M_CATEGORY = 8 then
    case ind1.M_RESET
-   when 0 then rtrim(icmviw1.M_HSR)
-   when 3 then coalesce(rtrim(undicmviw1.M_HSR), rtrim(undnbyfccicmviw1.M_HSR), rtrim(undnbyfcsicmviw1.M_HSR))
-   when 4 then coalesce(rtrim(nbyfcsicmviw11.M_HSR), rtrim(bskicmviw11.M_HSR), rtrim(bskicmviw1.M_HSR), rtrim(bskundicmviw1.M_HSR), rtrim(bskundnbyfccicmviw1.M_HSR), rtrim(bskundnbyfcsicmviw1.M_HSR))
-   when 6 then coalesce(rtrim(nbyfccicmviw1.M_HSR), rtrim(nbyfcsicmviw1.M_HSR),rtrim(nbyicmviw1.M_HSR)) else null end 
-when ind1.M_CATEGORY = 9 then rtrim(fcsicmviw1.M_HSR) else null end ICMHSR1,
+   when 0 then rtrim(icmviw1.M_HSRDFL)
+   when 3 then coalesce(rtrim(undicmviw1.M_HSRDFL), rtrim(undnbyfccicmviw1.M_HSRDFL), rtrim(undnbyfcsicmviw1.M_HSRDFL))
+   when 4 then coalesce(rtrim(nbyfcsicmviw11.M_HSRDFL), rtrim(bskicmviw11.M_HSRDFL), rtrim(bskicmviw1.M_HSRDFL), rtrim(bskundicmviw1.M_HSRDFL), rtrim(bskundnbyfccicmviw1.M_HSRDFL), rtrim(bskundnbyfcsicmviw1.M_HSRDFL))
+   when 6 then coalesce(rtrim(nbyfccicmviw1.M_HSRDFL), rtrim(nbyfcsicmviw1.M_HSRDFL),rtrim(nbyicmviw1.M_HSRDFL)) else null end 
+when ind1.M_CATEGORY = 9 then rtrim(fcsicmviw1.M_HSRDFL) else null end ICMHSR1,
 case 
 when ind1.M_CATEGORY = 8 then
    case ind1.M_RESET
@@ -439,11 +439,11 @@ when 9 then rtrim(fcsicmviw2.M_PUB) else null end ICMPUB2,
 case ind2.M_CATEGORY
 when 8 then
    case ind2.M_RESET
-   when 0 then rtrim(icmviw2.M_HSR)
-   when 3 then coalesce(rtrim(undicmviw2.M_HSR), rtrim(undnbyfccicmviw2.M_HSR), rtrim(undnbyfcsicmviw2.M_HSR))
-   when 4 then coalesce(rtrim(nbyfcsicmviw21.M_HSR), rtrim(bskicmviw21.M_HSR), rtrim(bskicmviw2.M_HSR), rtrim(bskundicmviw2.M_HSR), rtrim(bskindnbyfcsicmviw2.M_HSR), rtrim(bskundnbyfccicmviw2.M_HSR), rtrim(bskundnbyfcsicmviw2.M_HSR))
-   when 6 then coalesce(rtrim(nbyfccicmviw2.M_HSR), rtrim(nbyfcsicmviw2.M_HSR),rtrim(nbyicmviw2.M_HSR)) else null end 
-when 9 then rtrim(fcsicmviw2.M_HSR) else null end ICMHSR2,
+   when 0 then rtrim(icmviw2.M_HSRDFL)
+   when 3 then coalesce(rtrim(undicmviw2.M_HSRDFL), rtrim(undnbyfccicmviw2.M_HSRDFL), rtrim(undnbyfcsicmviw2.M_HSRDFL))
+   when 4 then coalesce(rtrim(nbyfcsicmviw21.M_HSRDFL), rtrim(bskicmviw21.M_HSRDFL), rtrim(bskicmviw2.M_HSRDFL), rtrim(bskundicmviw2.M_HSRDFL), rtrim(bskindnbyfcsicmviw2.M_HSRDFL), rtrim(bskundnbyfccicmviw2.M_HSRDFL), rtrim(bskundnbyfcsicmviw2.M_HSRDFL))
+   when 6 then coalesce(rtrim(nbyfccicmviw2.M_HSRDFL), rtrim(nbyfcsicmviw2.M_HSRDFL),rtrim(nbyicmviw2.M_HSRDFL)) else null end 
+when 9 then rtrim(fcsicmviw2.M_HSRDFL) else null end ICMHSR2,
 case ind2.M_CATEGORY
 when 8 then
    case ind2.M_RESET
@@ -599,84 +599,84 @@ left join CM_INDEX_DBF icm1 on ind1.M_COM_IND = icm1.M_REFERENCE and ind1.M_RESE
 left join CMC_QUOT_DBF qot1 on ind1.M_COM_QUOT = qot1.M_REFERENCE
 left join CM_UNIT_DBF  qotuoq1 on qot1.M_UNIT = qotuoq1.M_REFERENCE
 left join CM_UNIT_DBF  qotuod1 on qot1.M_QTY_UNIT = qotuod1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) icmviw1 on icm1.M_REFERENCE = icmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) icmviw1 on icm1.M_REFERENCE = icmviw1.M_ICMUID
 left join CM_MKTSR_DBF hsr1 on trim(substr(bskelt01.M_FORMULA,2,10)) = to_char(hsr1.M_SERIE)
 -- Avg 1
 left join RT_INDEX_DBF und1 on ind1.M_UNDRL = und1.M_INDEX
 left join CM_INDEX_DBF undicm1 on und1.M_COM_IND  = undicm1.M_REFERENCE
 left join CMC_QUOT_DBF undqot1 on und1.M_COM_QUOT = undqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undicmviw1 on undicm1.M_REFERENCE = undicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undicmviw1 on undicm1.M_REFERENCE = undicmviw1.M_ICMUID
 left join CM_FUT_DBF   undnbyfcm1 on (und1.M_COM_FUT = undnbyfcm1.M_REFERENCE and und1.M_COM_NBY_T = 0)
 left join RT_LNGN_DBF  undnbyfccgnl1 on (undnbyfcm1.M_CM_INSTR = undnbyfccgnl1.M_GEN_NUM and undnbyfcm1.M_INS_MODE = 0 and undnbyfcm1.M_LISTED in (1,2,16,32))
 left join RT_INDEX_DBF undnbyfccind1 on undnbyfccgnl1.M_INDEX0 = undnbyfccind1.M_INDEX
 left join CM_INDEX_DBF undnbyfccicm1 on (undnbyfccind1.M_COM_IND = undnbyfccicm1.M_REFERENCE and undnbyfccind1.M_RESET = 0)
 left join CMC_QUOT_DBF undnbyfccqot1 on undnbyfccind1.M_COM_QUOT = undnbyfccqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfccicmviw1 on undnbyfccicm1.M_REFERENCE = undnbyfccicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfccicmviw1 on undnbyfccicm1.M_REFERENCE = undnbyfccicmviw1.M_ICMUID
 left join CMC_MGEN_DBF undnbyfcsgnm1 on (undnbyfcm1.M_CM_INSTR = undnbyfcsgnm1.M_REFERENCE and undnbyfcm1.M_INS_MODE = 1 and undnbyfcm1.M_LISTED in (1,2,16))
 left join RT_INDEX_DBF undnbyfcsind1 on undnbyfcsgnm1.M_INDEX = undnbyfcsind1.M_INDEX
 left join CM_INDEX_DBF undnbyfcsicm1 on (undnbyfcsind1.M_COM_IND = undnbyfcsicm1.M_REFERENCE and undnbyfcsind1.M_RESET = 0)
 left join CMC_QUOT_DBF undnbyfcsqot1 on undnbyfcsind1.M_COM_QUOT = undnbyfcsqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfcsicmviw1 on undnbyfcsicm1.M_REFERENCE = undnbyfcsicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfcsicmviw1 on undnbyfcsicm1.M_REFERENCE = undnbyfcsicmviw1.M_ICMUID
 -- Nearby 1
 left join CM_FUT_DBF   nbyfcm1 on (ind1.M_COM_FUT = nbyfcm1.M_REFERENCE and ind1.M_RESET = 6 and ind1.M_COM_NBY_T = 0)
 left join RT_LNGN_DBF  nbyfccgnl1 on (nbyfcm1.M_CM_INSTR = nbyfccgnl1.M_GEN_NUM and nbyfcm1.M_INS_MODE = 0 and nbyfcm1.M_LISTED in (1,2,16,32))
 left join RT_INDEX_DBF nbyfccind1 on nbyfccgnl1.M_INDEX0 = nbyfccind1.M_INDEX
 left join CM_INDEX_DBF nbyfccicm1 on (nbyfccind1.M_COM_IND = nbyfccicm1.M_REFERENCE and nbyfccind1.M_RESET = 0)
 left join CMC_QUOT_DBF nbyfccqot1 on (nbyfccind1.M_COM_QUOT = nbyfccqot1.M_REFERENCE and nbyfccind1.M_RESET = 0)
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfccicmviw1 on nbyfccicm1.M_REFERENCE = nbyfccicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfccicmviw1 on nbyfccicm1.M_REFERENCE = nbyfccicmviw1.M_ICMUID
 left join CMC_MGEN_DBF nbyfcsgnm1 on (nbyfcm1.M_CM_INSTR = nbyfcsgnm1.M_REFERENCE and nbyfcm1.M_INS_MODE = 1 and nbyfcm1.M_LISTED in (1,2,16))
 left join RT_INDEX_DBF nbyfcsind1 on nbyfcsgnm1.M_INDEX = nbyfcsind1.M_INDEX
 left join CM_INDEX_DBF nbyfcsicm1 on (nbyfcsind1.M_COM_IND = nbyfcsicm1.M_REFERENCE and nbyfcsind1.M_RESET = 0)
 left join CMC_QUOT_DBF nbyfcsqot1 on (nbyfcsind1.M_COM_QUOT = nbyfcsqot1.M_REFERENCE and nbyfcsind1.M_RESET = 0)
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsicmviw1 on nbyfcsicm1.M_REFERENCE = nbyfcsicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsicmviw1 on nbyfcsicm1.M_REFERENCE = nbyfcsicmviw1.M_ICMUID
 left join CM_INDEX_DBF nbyicm1 on (ind1.M_COM_FUT = nbyicm1.M_REFERENCE and ind1.M_COM_NBY_T = 2)
 left join CMC_QUOT_DBF nbyqot1 on ind1.M_COM_QUOT = nbyqot1.M_REFERENCE and ind1.M_RESET = 6
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyicmviw1 on nbyicm1.M_REFERENCE = nbyicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyicmviw1 on nbyicm1.M_REFERENCE = nbyicmviw1.M_ICMUID
 -- Basket 1
 left join RT_INDBK_COMPONENT_DBF bskelt1 on (ind1.M_REFERENCE = bskelt1.M_BASKET_REFERENCE and bskelt1.M_ORDER = 0)
 left join RT_INDEX_DBF bskind1 on bskelt1.M_INDEX = bskind1.M_INDEX
 left join CM_INDEX_DBF bskicm1 on bskind1.M_COM_IND  = bskicm1.M_REFERENCE
 left join CMC_QUOT_DBF bskqot1 on bskind1.M_COM_QUOT = bskqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskicmviw1 on bskicm1.M_REFERENCE = bskicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskicmviw1 on bskicm1.M_REFERENCE = bskicmviw1.M_ICMUID
 left join CM_FUT_DBF   bskindnbyfcm1 on (bskind1.M_COM_FUT = bskindnbyfcm1.M_REFERENCE and bskind1.M_COM_NBY_T = 0 and bskindnbyfcm1.M_LISTED in (1,2,16))
 left join CMC_MGEN_DBF bskindnbyfcsgnm1 on (bskindnbyfcm1.M_CM_INSTR = bskindnbyfcsgnm1.M_REFERENCE and bskindnbyfcm1.M_INS_MODE = 1)
 left join RT_INDEX_DBF bskindnbyfcsind1 on bskindnbyfcsgnm1.M_INDEX = bskindnbyfcsind1.M_INDEX
 left join CM_INDEX_DBF bskindnbyfcsicm1 on (bskindnbyfcsind1.M_COM_IND = bskindnbyfcsicm1.M_REFERENCE and bskindnbyfcsind1.M_RESET = 0)
 left join CMC_QUOT_DBF bskindnbyfcsqot1 on bskindnbyfcsind1.M_COM_QUOT = bskindnbyfcsqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskindnbyfcsicmviw1 on bskindnbyfcsicm1.M_REFERENCE = bskindnbyfcsicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskindnbyfcsicmviw1 on bskindnbyfcsicm1.M_REFERENCE = bskindnbyfcsicmviw1.M_ICMUID
 left join RT_INDEX_DBF bskund1 on bskind1.M_UNDRL = bskund1.M_INDEX
 left join CM_INDEX_DBF bskundicm1 on (bskund1.M_COM_IND = bskundicm1.M_REFERENCE and bskund1.M_RESET = 0)
 left join CMC_QUOT_DBF bskundqot1 on bskund1.M_COM_QUOT = bskundqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundicmviw1 on bskundicm1.M_REFERENCE = bskundicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundicmviw1 on bskundicm1.M_REFERENCE = bskundicmviw1.M_ICMUID
 left join CM_FUT_DBF   bskundnbyfcm1 on (bskund1.M_COM_FUT = bskundnbyfcm1.M_REFERENCE and bskund1.M_COM_NBY_T = 0 and bskundnbyfcm1.M_LISTED in (1,2,16,32))
 left join RT_LNGN_DBF  bskundnbyfccgnl1 on (bskundnbyfcm1.M_CM_INSTR = bskundnbyfccgnl1.M_GEN_NUM and bskundnbyfcm1.M_INS_MODE = 0) 
 left join RT_INDEX_DBF bskundnbyfccind1 on bskundnbyfccgnl1.M_INDEX0 = bskundnbyfccind1.M_INDEX
 left join CM_INDEX_DBF bskundnbyfccicm1 on (bskundnbyfccind1.M_COM_IND = bskundnbyfccicm1.M_REFERENCE and bskundnbyfccind1.M_RESET = 0)
 left join CMC_QUOT_DBF bskundnbyfccqot1 on bskundnbyfccind1.M_COM_QUOT = bskundnbyfccqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundnbyfccicmviw1 on bskundnbyfccicm1.M_REFERENCE = bskundnbyfccicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundnbyfccicmviw1 on bskundnbyfccicm1.M_REFERENCE = bskundnbyfccicmviw1.M_ICMUID
 left join CMC_MGEN_DBF bskundnbyfcsgnm1 on (bskundnbyfcm1.M_CM_INSTR = bskundnbyfcsgnm1.M_REFERENCE and bskundnbyfcm1.M_INS_MODE = 1)
 left join RT_INDEX_DBF bskundnbyfcsind1 on bskundnbyfcsgnm1.M_INDEX = bskundnbyfcsind1.M_INDEX
 left join CM_INDEX_DBF bskundnbyfcsicm1 on (bskundnbyfcsind1.M_COM_IND = bskundnbyfcsicm1.M_REFERENCE and bskundnbyfcsind1.M_RESET = 0)
 left join CMC_QUOT_DBF bskundnbyfcsqot1 on bskundnbyfcsind1.M_COM_QUOT = bskundnbyfcsqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundnbyfcsicmviw1 on bskundnbyfcsicm1.M_REFERENCE = bskundnbyfcsicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundnbyfcsicmviw1 on bskundnbyfcsicm1.M_REFERENCE = bskundnbyfcsicmviw1.M_ICMUID
 left join RT_INDBK_COMPONENT_DBF bskelt11 on (bskind1.M_REFERENCE = bskelt11.M_BASKET_REFERENCE and bskelt11.M_ORDER = 0)
 left join RT_INDEX_DBF bskind11 on bskelt11.M_INDEX = bskind11.M_INDEX
 left join CM_INDEX_DBF bskicm11 on bskind11.M_COM_IND  = bskicm11.M_REFERENCE
 left join CMC_QUOT_DBF bskqot11 on bskind11.M_COM_QUOT = bskqot11.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskicmviw11 on bskicm11.M_REFERENCE = bskicmviw11.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskicmviw11 on bskicm11.M_REFERENCE = bskicmviw11.M_ICMUID
 left join CM_FUT_DBF   nbyfcm11 on (bskind11.M_COM_FUT = nbyfcm11.M_REFERENCE and bskind11.M_COM_NBY_T = 0)
 left join CMC_MGEN_DBF nbyfcsgnm11 on (nbyfcm11.M_CM_INSTR = nbyfcsgnm11.M_REFERENCE and nbyfcm11.M_INS_MODE = 1 and nbyfcm11.M_LISTED in (1,2,16))
 left join RT_INDEX_DBF nbyfcsind11 on nbyfcsgnm11.M_INDEX = nbyfcsind11.M_INDEX
 left join CM_INDEX_DBF nbyfcsicm11 on (nbyfcsind11.M_COM_IND = nbyfcsicm11.M_REFERENCE and nbyfcsind11.M_RESET = 0)
 left join CMC_QUOT_DBF nbyfcsqot11 on nbyfcsind11.M_COM_QUOT = nbyfcsqot11.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsicmviw11 on nbyfcsicm11.M_REFERENCE = nbyfcsicmviw11.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsicmviw11 on nbyfcsicm11.M_REFERENCE = nbyfcsicmviw11.M_ICMUID
 -- Forward 1
 left join CM_FUT_DBF   fut1 on ind1.M_COM_FUT = fut1.M_REFERENCE and ind1.M_CATEGORY = 9
 left join CMC_MGEN_DBF fcsgnm1 on (fut1.M_CM_INSTR = fcsgnm1.M_REFERENCE and fut1.M_INS_MODE = 1 and fut1.M_LISTED in (1,2,16))
 left join RT_INDEX_DBF fcsind1 on fcsgnm1.M_INDEX = fcsind1.M_INDEX
 left join CM_INDEX_DBF fcsicm1 on fcsind1.M_COM_IND = fcsicm1.M_REFERENCE
 left join CMC_QUOT_DBF fcsqot1 on fcsind1.M_COM_QUOT = fcsqot1.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) fcsicmviw1 on fcsicm1.M_REFERENCE = fcsicmviw1.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) fcsicmviw1 on fcsicm1.M_REFERENCE = fcsicmviw1.M_ICMUID
 -- ELT2
 left join RT_INDEX_DBF ind2 on bskelt02.M_INDEX = ind2.M_INDEX
 left join RT_INDEX_DBF und2 on ind2.M_UNDRL = und2.M_INDEX
@@ -686,7 +686,7 @@ left join CM_UNIT_DBF  uoq2 on ind2.M_UNIT_REF1 = uoq2.M_REFERENCE
 -- Spot 2
 left join CM_INDEX_DBF icm2 on ind2.M_COM_IND = icm2.M_REFERENCE and ind2.M_RESET = 0
 left join CMC_QUOT_DBF qot2 on ind2.M_COM_QUOT = qot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) icmviw2 on icm2.M_REFERENCE = icmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) icmviw2 on icm2.M_REFERENCE = icmviw2.M_ICMUID
 left join CM_UNIT_DBF  qotuoq2 on qot2.M_UNIT = qotuoq2.M_REFERENCE
 left join CM_UNIT_DBF  qotuod2 on qot2.M_QTY_UNIT = qotuod2.M_REFERENCE
 left join CM_MKTSR_DBF hsr2 on trim(substr(bskelt02.M_FORMULA,2,10)) = to_char(hsr2.M_SERIE)
@@ -694,85 +694,85 @@ left join CM_MKTSR_DBF hsr2 on trim(substr(bskelt02.M_FORMULA,2,10)) = to_char(h
 left join RT_INDEX_DBF und2 on ind2.M_UNDRL = und2.M_INDEX
 left join CM_INDEX_DBF undicm2 on und2.M_COM_IND  = undicm2.M_REFERENCE
 left join CMC_QUOT_DBF undqot2 on und2.M_COM_QUOT = undqot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undicmviw2 on undicm2.M_REFERENCE = undicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undicmviw2 on undicm2.M_REFERENCE = undicmviw2.M_ICMUID
 left join CM_FUT_DBF   undnbyfcm2    on (und2.M_COM_FUT = undnbyfcm2.M_REFERENCE and und2.M_COM_NBY_T = 0 and undnbyfcm2.M_LISTED in (1,2,16))
 left join RT_LNGN_DBF  undnbyfccgnl2 on (undnbyfcm2.M_CM_INSTR = undnbyfccgnl2.M_GEN_NUM and undnbyfcm2.M_INS_MODE = 0 and undnbyfcm2.M_LISTED in (1,2,16,32))
 left join RT_INDEX_DBF undnbyfccind2 on undnbyfccgnl2.M_INDEX0 = undnbyfccind2.M_INDEX
 left join CM_INDEX_DBF undnbyfccicm2 on (undnbyfccind2.M_COM_IND = undnbyfccicm2.M_REFERENCE and undnbyfccind2.M_RESET = 0)
 left join CMC_QUOT_DBF undnbyfccqot2 on undnbyfccind2.M_COM_QUOT = undnbyfccqot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfccicmviw2 on undnbyfccicm2.M_REFERENCE = undnbyfccicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfccicmviw2 on undnbyfccicm2.M_REFERENCE = undnbyfccicmviw2.M_ICMUID
 left join CMC_MGEN_DBF undnbyfcsgnm2 on (undnbyfcm2.M_CM_INSTR = undnbyfcsgnm2.M_REFERENCE and undnbyfcm2.M_INS_MODE = 1)
 left join RT_INDEX_DBF undnbyfcsind2 on undnbyfcsgnm2.M_INDEX = undnbyfcsind2.M_INDEX
 left join CM_INDEX_DBF undnbyfcsicm2 on (undnbyfcsind2.M_COM_IND = undnbyfcsicm2.M_REFERENCE and undnbyfcsind2.M_RESET = 0)
 left join CMC_QUOT_DBF undnbyfcsqot2 on undnbyfcsind2.M_COM_QUOT = undnbyfcsqot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfcsicmviw2 on undnbyfcsicm2.M_REFERENCE = undnbyfcsicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) undnbyfcsicmviw2 on undnbyfcsicm2.M_REFERENCE = undnbyfcsicmviw2.M_ICMUID
 -- Nearby 2
 left join CM_FUT_DBF   nbyfcm2    on (ind2.M_COM_FUT = nbyfcm2.M_REFERENCE and ind2.M_COM_NBY_T = 0 and nbyfcm2.M_LISTED in (1,2,16,32))
 left join RT_LNGN_DBF  nbyfccgnl2 on (nbyfcm2.M_CM_INSTR = nbyfccgnl2.M_GEN_NUM and nbyfcm2.M_INS_MODE = 0)
 left join RT_INDEX_DBF nbyfccind2 on nbyfccgnl2.M_INDEX0 = nbyfccind2.M_INDEX
 left join CM_INDEX_DBF nbyfccicm2 on (nbyfccind2.M_COM_IND  = nbyfccicm2.M_REFERENCE and nbyfccind2.M_RESET = 0)
 left join CMC_QUOT_DBF nbyfccqot2 on (nbyfccind2.M_COM_QUOT = nbyfccqot2.M_REFERENCE and nbyfccind2.M_RESET = 0)
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfccicmviw2 on nbyfccicm2.M_REFERENCE = nbyfccicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB,  M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfccicmviw2 on nbyfccicm2.M_REFERENCE = nbyfccicmviw2.M_ICMUID
 left join CMC_MGEN_DBF nbyfcsgnm2 on (nbyfcm2.M_CM_INSTR = nbyfcsgnm2.M_REFERENCE and nbyfcm2.M_INS_MODE = 1)
 left join RT_INDEX_DBF nbyfcsind2 on nbyfcsgnm2.M_INDEX = nbyfcsind2.M_INDEX
 left join CM_INDEX_DBF nbyfcsicm2 on (nbyfcsind2.M_COM_IND  = nbyfcsicm2.M_REFERENCE and nbyfcsind2.M_RESET = 0)
 left join CMC_QUOT_DBF nbyfcsqot2 on (nbyfcsind2.M_COM_QUOT = nbyfcsqot2.M_REFERENCE and nbyfcsind2.M_RESET = 0)
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsicmviw2 on nbyfcsicm2.M_REFERENCE = nbyfcsicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsicmviw2 on nbyfcsicm2.M_REFERENCE = nbyfcsicmviw2.M_ICMUID
 left join RT_INDEX_DBF nbyfcsund2 on nbyfcsind2.M_UNDRL = nbyfcsund2.M_INDEX
 left join CM_FUT_DBF   nbyfcsundfcm2 on (nbyfcsund2.M_COM_FUT = nbyfcsundfcm2.M_REFERENCE and nbyfcsund2.M_COM_NBY_T = 0 and nbyfcsundfcm2.M_LISTED in (1,2,16))
 left join CMC_MGEN_DBF nbyfcsundgnm2 on (nbyfcsundfcm2.M_CM_INSTR = nbyfcsundgnm2.M_REFERENCE and nbyfcsundfcm2.M_INS_MODE = 1)
 left join RT_INDEX_DBF nbyfcsundind2 on nbyfcsundgnm2.M_INDEX = nbyfcsundind2.M_INDEX
 left join CM_INDEX_DBF nbyfcsundicm2 on (nbyfcsundind2.M_COM_IND  = nbyfcsundicm2.M_REFERENCE and nbyfcsundind2.M_RESET = 0)
 left join CMC_QUOT_DBF nbyfcsundqot2 on (nbyfcsundind2.M_COM_QUOT = nbyfcsundqot2.M_REFERENCE and nbyfcsundind2.M_RESET = 0)
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsundicmviw2 on nbyfcsundicm2.M_REFERENCE = nbyfcsundicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB,  M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsundicmviw2 on nbyfcsundicm2.M_REFERENCE = nbyfcsundicmviw2.M_ICMUID
 left join CM_INDEX_DBF nbyicm2 on (ind2.M_COM_FUT = nbyicm2.M_REFERENCE and ind2.M_COM_NBY_T = 2)
 left join CMC_QUOT_DBF nbyqot2 on ind2.M_COM_QUOT = nbyqot2.M_REFERENCE and ind2.M_RESET = 6
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyicmviw2 on nbyicm2.M_REFERENCE = nbyicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyicmviw2 on nbyicm2.M_REFERENCE = nbyicmviw2.M_ICMUID
 -- Basket 2
 left join RT_INDBK_COMPONENT_DBF bskelt2 on (ind2.M_REFERENCE = bskelt2.M_BASKET_REFERENCE and bskelt2.M_ORDER = 0)
 left join RT_INDEX_DBF bskind2 on bskelt2.M_INDEX = bskind2.M_INDEX
 left join CM_INDEX_DBF bskicm2 on bskind2.M_COM_IND  = bskicm2.M_REFERENCE
 left join CMC_QUOT_DBF bskqot2 on bskind2.M_COM_QUOT = bskqot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskicmviw2 on bskicm2.M_REFERENCE = bskicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskicmviw2 on bskicm2.M_REFERENCE = bskicmviw2.M_ICMUID
 left join CM_FUT_DBF   bskindnbyfcm2 on (bskind2.M_COM_FUT = bskindnbyfcm2.M_REFERENCE and bskind2.M_COM_NBY_T = 0 and bskindnbyfcm2.M_LISTED in (1,2,16))
 left join CMC_MGEN_DBF bskindnbyfcsgnm2 on (bskindnbyfcm2.M_CM_INSTR = bskindnbyfcsgnm2.M_REFERENCE and bskindnbyfcm2.M_INS_MODE = 1)
 left join RT_INDEX_DBF bskindnbyfcsind2 on bskindnbyfcsgnm2.M_INDEX = bskindnbyfcsind2.M_INDEX
 left join CM_INDEX_DBF bskindnbyfcsicm2 on (bskindnbyfcsind2.M_COM_IND = bskindnbyfcsicm2.M_REFERENCE and bskindnbyfcsind2.M_RESET = 0)
 left join CMC_QUOT_DBF bskindnbyfcsqot2 on bskindnbyfcsind2.M_COM_QUOT = bskindnbyfcsqot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskindnbyfcsicmviw2 on bskindnbyfcsicm2.M_REFERENCE = bskindnbyfcsicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB,  M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskindnbyfcsicmviw2 on bskindnbyfcsicm2.M_REFERENCE = bskindnbyfcsicmviw2.M_ICMUID
 left join RT_INDEX_DBF bskund2 on bskind2.M_UNDRL = bskund2.M_INDEX
 left join CM_INDEX_DBF bskundicm2 on (bskund2.M_COM_IND = bskundicm2.M_REFERENCE and bskund2.M_RESET = 0)
 left join CMC_QUOT_DBF bskundqot2 on bskund2.M_COM_QUOT = bskundqot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundicmviw2 on bskundicm2.M_REFERENCE = bskundicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundicmviw2 on bskundicm2.M_REFERENCE = bskundicmviw2.M_ICMUID
 left join CM_FUT_DBF   bskundnbyfcm2 on (bskund2.M_COM_FUT = bskundnbyfcm2.M_REFERENCE and bskund2.M_COM_NBY_T = 0 and undnbyfcm2.M_LISTED in (1,2,16,32))
 left join RT_LNGN_DBF  bskundnbyfccgnl2 on (bskundnbyfcm2.M_CM_INSTR = bskundnbyfccgnl2.M_GEN_NUM and bskundnbyfcm2.M_INS_MODE = 0)
 left join RT_INDEX_DBF bskundnbyfccind2 on bskundnbyfccgnl2.M_INDEX0 = bskundnbyfccind2.M_INDEX
 left join CM_INDEX_DBF bskundnbyfccicm2 on (bskundnbyfccind2.M_COM_IND = bskundnbyfccicm2.M_REFERENCE and bskundnbyfccind2.M_RESET = 0)
 left join CMC_QUOT_DBF bskundnbyfccqot2 on bskundnbyfccind2.M_COM_QUOT = bskundnbyfccqot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundnbyfccicmviw2 on bskundnbyfccicm2.M_REFERENCE = bskundnbyfccicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundnbyfccicmviw2 on bskundnbyfccicm2.M_REFERENCE = bskundnbyfccicmviw2.M_ICMUID
 left join CMC_MGEN_DBF bskundnbyfcsgnm2 on (bskundnbyfcm2.M_CM_INSTR = bskundnbyfcsgnm2.M_REFERENCE and bskundnbyfcm2.M_INS_MODE = 1)
 left join RT_INDEX_DBF bskundnbyfcsind2 on bskundnbyfcsgnm2.M_INDEX = bskundnbyfcsind2.M_INDEX
 left join CM_INDEX_DBF bskundnbyfcsicm2 on (bskundnbyfcsind2.M_COM_IND = bskundnbyfcsicm2.M_REFERENCE and bskundnbyfcsind2.M_RESET = 0)
 left join CMC_QUOT_DBF bskundnbyfcsqot2 on bskundnbyfcsind2.M_COM_QUOT = bskundnbyfcsqot2.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundnbyfcsicmviw2 on bskundnbyfcsicm2.M_REFERENCE = bskundnbyfcsicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB,  M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskundnbyfcsicmviw2 on bskundnbyfcsicm2.M_REFERENCE = bskundnbyfcsicmviw2.M_ICMUID
 left join RT_INDBK_COMPONENT_DBF bskelt21 on (bskind2.M_REFERENCE = bskelt21.M_BASKET_REFERENCE and bskelt21.M_ORDER = 0)
 left join RT_INDEX_DBF bskind21 on bskelt21.M_INDEX = bskind21.M_INDEX
 left join CM_INDEX_DBF bskicm21 on bskind21.M_COM_IND  = bskicm21.M_REFERENCE
 left join CMC_QUOT_DBF bskqot21 on bskind21.M_COM_QUOT = bskqot21.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskicmviw21 on bskicm21.M_REFERENCE = bskicmviw21.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) bskicmviw21 on bskicm21.M_REFERENCE = bskicmviw21.M_ICMUID
 left join CM_FUT_DBF   nbyfcm21 on (bskind21.M_COM_FUT = nbyfcm21.M_REFERENCE and bskind21.M_COM_NBY_T = 0)
 left join CMC_MGEN_DBF nbyfcsgnm21 on (nbyfcm21.M_CM_INSTR = nbyfcsgnm21.M_REFERENCE and nbyfcm21.M_INS_MODE = 1 and nbyfcm21.M_LISTED in (1,2,16))
 left join RT_INDEX_DBF nbyfcsind21 on rtrim(nbyfcsgnm21.M_INDEX) = rtrim(nbyfcsind21.M_INDEX)
 left join CM_INDEX_DBF nbyfcsicm21 on (nbyfcsind21.M_COM_IND = nbyfcsicm21.M_REFERENCE and nbyfcsind21.M_RESET = 0)
 left join CMC_QUOT_DBF nbyfcsqot21 on nbyfcsind21.M_COM_QUOT = nbyfcsqot21.M_REFERENCE
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsicmviw21 on nbyfcsicm21.M_REFERENCE = nbyfcsicmviw21.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) nbyfcsicmviw21 on nbyfcsicm21.M_REFERENCE = nbyfcsicmviw21.M_ICMUID
 -- Forward 2
 left join CM_FUT_DBF   fut2 on ind2.M_COM_FUT = fut2.M_REFERENCE and ind2.M_CATEGORY = 9 and fut2.M_LISTED in (1,2,16)
 left join CMC_MGEN_DBF fcsgnm2 on (fut2.M_CM_INSTR = fcsgnm2.M_REFERENCE and fut2.M_INS_MODE = 1)
 left join RT_INDEX_DBF fcsind2 on fcsgnm2.M_INDEX = fcsind2.M_INDEX
 left join CM_INDEX_DBF fcsicm2 on (fcsind2.M_COM_IND = fcsicm2.M_REFERENCE and fcsind2.M_RESET = 0)
 left join CMC_QUOT_DBF fcsqot2 on (fcsind2.M_COM_QUOT = fcsqot2.M_REFERENCE and fcsind2.M_RESET = 0)
-left join (select distinct M_ICMUID, M_PUB, M_HSR, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB, M_CRVTYP, M_CRVOBJ, M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID, M_CRVUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) fcsicmviw2 on fcsicm2.M_REFERENCE = fcsicmviw2.M_ICMUID
+left join (select distinct M_ICMUID, M_PUB, M_HSRDFL, M_CAL, M_UOQ, M_UOD, M_PHYLAB, M_LOCLAB,  M_PHYUID, M_LOCUID, M_QOTUID, M_QOTFWDUID from VIW_ICMSPT_DBF where M_QOTUID = M_QOTFWDUID) fcsicmviw2 on fcsicm2.M_REFERENCE = fcsicmviw2.M_ICMUID
 -- ELT3
 left join RT_INDEX_DBF ind3 on bskelt03.M_INDEX = ind3.M_INDEX 
 left join CM_INDEX_DBF icm3 on ind3.M_COM_IND = icm3.M_REFERENCE
@@ -788,6 +788,7 @@ where 1 = 1
 and ind.M_CREAT_MODE = 0
 and ind.M_CATEGORY = 8 
 and ind.M_RESET = 4 
+
 
 );
 

@@ -1,121 +1,3 @@
-drop view PLI_VIW;
-create view PLI_VIW
-(
-M_PLIFML,
-M_SUBFML,
-M_FINASS,
-M_COMATP,
-M_COMASS,
-M_PLITYP,
-M_PLILAB,
-M_PLIDES,
-M_PLICUR,
-M_BDYLAB,
-M_BDYDES,
-M_PUBLAB,
-M_PUBCAL,
-M_PAYCAL,
-M_PUBMIC,
-M_PUBLEI,
-M_CNTSYM,
-M_CNTCOD,
-M_LSTOTC,
-M_OPTLIN,
-M_MULCUR,
-M_PLIQOT,
-M_CUR,
-M_UOQ,
-M_UOD,
-M_LOTSIZ,
-M_OPTSTY,
-M_PRMSTY,
-M_EXRMOD,
-M_EXRMKT,
-M_MC,
-M_PLUNAT,
-M_PLUITP,
-M_PLUPLI,
-M_OBS,
-M_MATCAS,
-M_VIN,
-M_LEGPAT,
-M_LEGCUR0,
-M_INDTYP0,
-M_INDLAB0,
-M_INDARC0,
-M_INDCAL0,
-M_OBSFRQ0,
-M_OBSCAL0,
-M_RNDRUL0,
-M_RNDDEC0,
-M_UNDTYP0,
-M_UNDLAB0,
-M_UNDQOT0,
-M_UNDARC0,
-M_UNDCAL0,
-M_UNDHSR0,
-M_BSKINDLAB01,
-M_BSKINDHSR01,
-M_BSKRNDRUL01,
-M_BSKRNDDEC01,
-M_BSKINDLAB02,
-M_BSKINDHSR02,
-M_BSKRNDRUL02,
-M_BSKRNDDEC02,
-M_LEGCUR1,
-M_INDTYP1,
-M_INDLAB1,
-M_INDARC1,
-M_INDCAL1,
-M_OBSFRQ1,
-M_OBSCAL1,
-M_RNDRUL1,
-M_RNDDEC1,
-M_UNDTYP1,
-M_UNDLAB1,
-M_UNDQOT1,
-M_UNDARC1,
-M_UNDCAL1,
-M_UNDHSR1,
-M_CRVICM0,
-M_CRVQOT0,
-M_CRVPUB0,
-M_CRVSYM0,
-M_CRVHSR0,
-M_CRVCAL0,
-M_CRVFWD0,
-M_CRVICM1,
-M_CRVQOT1,
-M_CRVPUB1,
-M_CRVSYM1,
-M_CRVHSR1,
-M_CRVCAL1,
-M_PHYLAB,
-M_LOCLAB,
-M_PRFLST,
-M_PLIREF,
-M_FMLUID,
-M_PLIUID,
-M_BDYUID,
-M_PUBUID,
-M_INDNDX0,
-M_INDUID0,
-M_UNDNDX0,
-M_UNDUID0,
-M_CRVUID0,
-M_INDNDX1,
-M_INDUID1,
-M_UNDNDX1,
-M_UNDUID1,
-M_PHYUID,
-M_LOCUID,
-M_SYSDAT,
-M_CNTURL
-)
-
-as
-
-(
 
 select distinct
 -- CATEGORIZATION
@@ -518,9 +400,7 @@ when pli.M_FAMILY in (1) and rtrim(seh.M_SE_CATE) = 'Swap' then substr(feq.M_FU_
 when pli.M_FAMILY in (1) and rtrim(seh.M_SE_CATE) = 'Rate' then to_char(feqsch.M_DEF_FREQ)
 when pli.M_FAMILY in (32,16384) then rtrim(fcmudf.M_MATCAST) 
 else null end MATCAS,
-case
-when pli.M_FAMILY in (32,16384) then coalesce(rtrim(fcmviw.M_VINFLT),'.') 
-else '.' end VIN,
+case when pli.M_FAMILY in (32,16384) then coalesce(rtrim(fcmviw.M_VINFLT),'.') else '.' end VIN,
 -- Indices
 case pli.M_FAMILY
 when     1 then coalesce(rtrim(genbnd.M_LEGPAT), rtrim(genfeqbnd.M_LEGPAT), rtrim(genfeqswp.M_LEGPAT), 'Fix')
@@ -787,96 +667,91 @@ case when pli.M_FAMILY in (2) and gin.M_INSTR_TYPE in (13,27) then rtrim(genivw1
 case when pli.M_FAMILY in (2) and gin.M_INSTR_TYPE in (13,27) then rtrim(genivw1.M_UNDPUB) else null end UNDARC1,
 case when pli.M_FAMILY in (2) and gin.M_INSTR_TYPE in (13,27) then rtrim(genivw1.M_UNDCAL) else null end UNDCAL1,
 case when pli.M_FAMILY in (2) and gin.M_INSTR_TYPE in (13,27) then rtrim(genivw1.M_UNDHSR) else null end UNDHSR1,
--- CURVE
+-- ROOTS
 case
-when pli.M_FAMILY in (2,512) then genivw0.M_CRVICM0
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVICM0, fcsgenivw.M_CRVICM0)
-when pli.M_FAMILY in (256)   then ivw.M_CRVICM0
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVICM0)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVICM0, ofcfccgenivw.M_CRVICM0, ofcfcsgenivw.M_CRVICM0)
-else null end CRVICM0,
+when pli.M_FAMILY in (2,512) then genivw0.M_ROTICM0
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTICM0, fcsgenivw.M_ROTICM0)
+when pli.M_FAMILY in (256)   then ivw.M_ROTICM0
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTICM0)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTICM0, ofcfccgenivw.M_ROTICM0, ofcfcsgenivw.M_ROTICM0)
+else null end ROTICM0,
 case
-when pli.M_FAMILY in (2,512) then genivw0.M_CRVQOT0
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVQOT0, fcsgenivw.M_CRVQOT0)
-when pli.M_FAMILY in (256)   then ivw.M_CRVQOT0
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVQOT0)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVQOT0, ofcfccgenivw.M_CRVQOT0, ofcfcsgenivw.M_CRVQOT0)
-else null end CRVQOT0,
+when pli.M_FAMILY in (2,512) then genivw0.M_ROTQOT0
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTQOT0, fcsgenivw.M_ROTQOT0)
+when pli.M_FAMILY in (256)   then ivw.M_ROTQOT0
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTQOT0)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTQOT0, ofcfccgenivw.M_ROTQOT0, ofcfcsgenivw.M_ROTQOT0)
+else null end ROTQOT0,
 case
-when pli.M_FAMILY in (2,512) then genivw0.M_CRVPUB0
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVPUB0, fcsgenivw.M_CRVPUB0)
-when pli.M_FAMILY in (256)   then ivw.M_CRVPUB0
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVPUB0)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVPUB0, ofcfccgenivw.M_CRVPUB0, ofcfcsgenivw.M_CRVPUB0)
-else null end CRVPUB0,
+when pli.M_FAMILY in (2,512) then genivw0.M_ROTPUB0
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTPUB0, fcsgenivw.M_ROTPUB0)
+when pli.M_FAMILY in (256)   then ivw.M_ROTPUB0
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTPUB0)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTPUB0, ofcfccgenivw.M_ROTPUB0, ofcfcsgenivw.M_ROTPUB0)
+else null end ROTPUB0,
 case
-when pli.M_FAMILY in (2,512) then genivw0.M_CRVSYM0
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVSYM0, fcsgenivw.M_CRVSYM0)
-when pli.M_FAMILY in (256)   then ivw.M_CRVSYM0
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVSYM0)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVSYM0, ofcfccgenivw.M_CRVSYM0, ofcfcsgenivw.M_CRVSYM0)
-else null end CRVSYM0,
+when pli.M_FAMILY in (2,512) then genivw0.M_ROTSYM0
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTSYM0, fcsgenivw.M_ROTSYM0)
+when pli.M_FAMILY in (256)   then ivw.M_ROTSYM0
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTSYM0)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTSYM0, ofcfccgenivw.M_ROTSYM0, ofcfcsgenivw.M_ROTSYM0)
+else null end ROTSYM0,
 case
-when pli.M_FAMILY in (2,512) then genivw0.M_CRVHSR0
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVHSR0, fcsgenivw.M_CRVHSR0)
-when pli.M_FAMILY in (256)   then ivw.M_CRVHSR0
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVHSR0)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVHSR0, ofcfccgenivw.M_CRVHSR0, ofcfcsgenivw.M_CRVHSR0)
-else null end CRVHSR0,
+when pli.M_FAMILY in (2,512) then genivw0.M_ROTHSR0
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTHSR0, fcsgenivw.M_ROTHSR0)
+when pli.M_FAMILY in (256)   then ivw.M_ROTHSR0
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTHSR0)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTHSR0, ofcfccgenivw.M_ROTHSR0, ofcfcsgenivw.M_ROTHSR0)
+else null end ROTHSR0,
 case
-when pli.M_FAMILY in (2,512) then genivw0.M_CRVCAL0
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVCAL0, fcsgenivw.M_CRVCAL0)
-when pli.M_FAMILY in (256)   then ivw.M_CRVCAL0
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVCAL0)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVCAL0, ofcfccgenivw.M_CRVCAL0, ofcfcsgenivw.M_CRVCAL0)
-else null end CRVCAL0,
+when pli.M_FAMILY in (2,512) then genivw0.M_ROTCAL0
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTCAL0, fcsgenivw.M_ROTCAL0)
+when pli.M_FAMILY in (256)   then ivw.M_ROTCAL0
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTCAL0)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTCAL0, ofcfccgenivw.M_ROTCAL0, ofcfcsgenivw.M_ROTCAL0)
+else null end ROTCAL0,
 case
-when pli.M_FAMILY in (2,512) then rtrim(genivw0.M_CRVOBJ0)
-when pli.M_FAMILY in (32)    then coalesce(rtrim(fccgenivw.M_CRVOBJ0), rtrim(fcsgenivw.M_CRVOBJ0))
-when pli.M_FAMILY in (16384) then coalesce(rtrim(fccgenivw.M_CRVOBJ0), rtrim(ofcfccgenivw.M_CRVOBJ0), rtrim(ofcfcsgenivw.M_CRVOBJ0))
-else null end CRVOBJ0,
+when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw0.M_ROTICM1), rtrim(genivw1.M_ROTICM0))
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTICM1, fcsgenivw.M_ROTICM1)
+when pli.M_FAMILY in (256)   then ivw.M_ROTICM1
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTICM1)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTICM1, ofcfccgenivw.M_ROTICM1, ofcfcsgenivw.M_ROTICM1)
+else null end ROTICM1,
 case
-when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw0.M_CRVICM1), rtrim(genivw1.M_CRVICM0))
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVICM1, fcsgenivw.M_CRVICM1)
-when pli.M_FAMILY in (256)   then ivw.M_CRVICM1
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVICM1)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVICM1, ofcfccgenivw.M_CRVICM1, ofcfcsgenivw.M_CRVICM1)
-else null end CRVICM1,
+when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw0.M_ROTQOT1), rtrim(genivw1.M_ROTQOT0))
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTQOT1, fcsgenivw.M_ROTQOT1)
+when pli.M_FAMILY in (256)   then ivw.M_ROTQOT1
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTQOT1)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTQOT1, ofcfccgenivw.M_ROTQOT1, ofcfcsgenivw.M_ROTQOT1)
+else null end ROTQOT1,
 case
-when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw0.M_CRVQOT1), rtrim(genivw1.M_CRVQOT0))
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVQOT1, fcsgenivw.M_CRVQOT1)
-when pli.M_FAMILY in (256)   then ivw.M_CRVQOT1
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVQOT1)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVQOT1, ofcfccgenivw.M_CRVQOT1, ofcfcsgenivw.M_CRVQOT1)
-else null end CRVQOT1,
+when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw0.M_ROTPUB1), rtrim(genivw1.M_ROTPUB0))
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTPUB1, fcsgenivw.M_ROTPUB1)
+when pli.M_FAMILY in (256)   then ivw.M_ROTPUB1
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTPUB1)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTPUB1, ofcfccgenivw.M_ROTPUB1, ofcfcsgenivw.M_ROTPUB1)
+else null end ROTPUB1,
 case
-when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw0.M_CRVPUB1), rtrim(genivw1.M_CRVPUB0))
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVPUB1, fcsgenivw.M_CRVPUB1)
-when pli.M_FAMILY in (256)   then ivw.M_CRVPUB1
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVPUB1)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVPUB1, ofcfccgenivw.M_CRVPUB1, ofcfcsgenivw.M_CRVPUB1)
-else null end CRVPUB1,
+when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw1.M_ROTSYM0),rtrim(genivw0.M_ROTSYM1))
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTSYM1, fcsgenivw.M_ROTSYM1)
+when pli.M_FAMILY in (256)   then ivw.M_ROTSYM1
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTSYM1)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTSYM1, ofcfccgenivw.M_ROTSYM1, ofcfcsgenivw.M_ROTSYM1)
+else null end ROTSYM1,
 case
-when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw1.M_CRVSYM0),rtrim(genivw0.M_CRVSYM1))
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVSYM1, fcsgenivw.M_CRVSYM1)
-when pli.M_FAMILY in (256)   then ivw.M_CRVSYM1
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVSYM1)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVSYM1, ofcfccgenivw.M_CRVSYM1, ofcfcsgenivw.M_CRVSYM1)
-else null end CRVSYM1,
+when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw1.M_ROTHSR0),rtrim(genivw0.M_ROTHSR1))
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTHSR1, fcsgenivw.M_ROTHSR1)
+when pli.M_FAMILY in (256)   then ivw.M_ROTHSR1
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTHSR1)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTHSR1, ofcfccgenivw.M_ROTHSR1, ofcfcsgenivw.M_ROTHSR1)
+else null end ROTHSR1,
 case
-when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw1.M_CRVHSR0),rtrim(genivw0.M_CRVHSR1))
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVHSR1, fcsgenivw.M_CRVHSR1)
-when pli.M_FAMILY in (256)   then ivw.M_CRVHSR1
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVHSR1)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVHSR1, ofcfccgenivw.M_CRVHSR1, ofcfcsgenivw.M_CRVHSR1)
-else null end CRVHSR1,
-case
-when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw1.M_CRVCAL0),rtrim(genivw0.M_CRVCAL1))
-when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_CRVCAL1, fcsgenivw.M_CRVCAL1)
-when pli.M_FAMILY in (256)   then ivw.M_CRVCAL1
-when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_CRVCAL1)
-when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_CRVCAL1, ofcfccgenivw.M_CRVCAL1, ofcfcsgenivw.M_CRVCAL1)
-else null end CRVCAL1,
+when pli.M_FAMILY in (2,512) then coalesce(rtrim(genivw1.M_ROTCAL0),rtrim(genivw0.M_ROTCAL1))
+when pli.M_FAMILY in (32)    then coalesce(fccgenivw.M_ROTCAL1, fcsgenivw.M_ROTCAL1)
+when pli.M_FAMILY in (256)   then ivw.M_ROTCAL1
+when pli.M_FAMILY in (2048)  then rtrim(phyivw.M_ROTCAL1)
+when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_ROTCAL1, ofcfccgenivw.M_ROTCAL1, ofcfcsgenivw.M_ROTCAL1)
+else null end ROTCAL1,
 -- DELIVERY
 case
 when pli.M_FAMILY in (1)     then rtrim(sct.M_LABEL)
@@ -967,7 +842,6 @@ when pli.M_FAMILY in (512)   then genivw0.M_UNDUID
 when pli.M_FAMILY in (2048)  then phyivw.M_INDUID
 when pli.M_FAMILY in (16384) then coalesce(fccgenivw.M_UNDUID, ofcfccgenivw.M_UNDUID, ofcfcsgenivw.M_UNDUID)
 else null end UNDUID0,
-coalesce(genivw0.M_CRVUID, fccgenivw.M_CRVUID, fcsgenivw.M_CRVUID, ofcfccgenivw.M_CRVUID, ofcfcsgenivw.M_CRVUID) CRVUID0,
 case
 when pli.M_FAMILY in (2) then
    case 
@@ -1055,7 +929,7 @@ left join RT_LNGN_DBF  gencom on gin.M_GEN_NUM = gencom.M_GEN_NUM
 left join RT_INDEX_DBF genind0 on rtrim(gencom.M_INDEX0) = rtrim(genind0.M_INDEX)
 left join CM_ASSET_DBF genass on to_number(ltrim(genind0.M_RT_SELAB)) = genass.M_REFERENCE
 left join CM_ATYPE_DBF genatp on genass.M_TYPE = genatp.M_REFERENCE
-left join VIW_ICMALL_DBF genivw0 on genind0.M_REFERENCE = genivw0.M_INDUID
+left join VIW_ICMALL_DBF genivw0 on genind0.M_REFERENCE = genivw0.M_INDUID 
 left join TABLE#DATA#INDEXES_DBF genindudf0 on (genind0.M_INDEX = genindudf0.M_INDEX and genindudf0.M_LOT <> 0)
 left join CM_MKTSR_DBF genhsr0 on rtrim(substr(gencom.M_FORMULA0,2,10)) = rtrim(to_char(genhsr0.M_SERIE))
 left join RT_INDEX_DBF genind1 on rtrim(gencom.M_INDEX1) = rtrim(genind1.M_INDEX)
@@ -1075,12 +949,12 @@ left join CM_FUT_DBF   ofcfc2 on fcm.M_CONTRACT2 = ofcfc2.M_REFERENCE and fcm.M_
 left join VIW_FCM_DBF  fcmviw on fcm.M_REFERENCE = fcmviw.M_FCMUID
 -- CM Future
 left join CMC_MGEN_DBF   fcsgen     on fcm.M_CM_INSTR = fcsgen.M_REFERENCE and fcm.M_LISTED in (1,2,16,32) and fcm.M_INS_MODE = 1
-left join RT_INDEX_DBF   fcsgenind  on fcsgen.M_INDEX = fcsgenind.M_INDEX
+left join RT_INDEX_DBF   fcsgenind  on fcsgen.M_INDEX = fcsgenind.M_INDEX 
 left join VIW_ICMALL_DBF fcsgenivw  on fcsgenind.M_REFERENCE = fcsgenivw.M_INDUID
 left join RT_INSGN_DBF   fccgen     on (fcm.M_CM_INSTR = fccgen.M_GEN_NUM and fcm.M_LISTED in (1,2,16,32) and fcm.M_INS_MODE = 0)
 left join RT_LNGN_DBF    fccgencom  on (fcm.M_CM_INSTR = fccgencom.M_GEN_NUM and fcm.M_INS_MODE = 0)
 left join RT_INDEX_DBF   fccgenind  on rtrim(fccgencom.M_INDEX0) = rtrim(fccgenind.M_INDEX)
-left join VIW_ICMALL_DBF fccgenivw  on fccgenind.M_REFERENCE = fccgenivw.M_INDUID
+left join VIW_ICMALL_DBF fccgenivw  on fccgenind.M_REFERENCE = fccgenivw.M_INDUID  
 -- CM Option on Future
 left join CMC_MGEN_DBF   ofcfcsgen    on (ofcfcm.M_CM_INSTR = ofcfcsgen.M_REFERENCE and ofcfcm.M_LISTED in (1,2,16,32) and ofcfcm.M_INS_MODE = 1)
 left join RT_INDEX_DBF   ofcfcsgenind on ofcfcsgen.M_INDEX = ofcfcsgenind.M_INDEX
@@ -1156,10 +1030,6 @@ or pli.M_FAMILY  = 16384
 and rtrim(prfpli.M_VALUE) is not null
 -- and rtrim(prfpli.M_INDEX2) in (142, 145, 151, 152, 160, 161, 162, 163, 164, 170, 171, 173, 174, 191, 195, 196, 200)
 -- and pli.M_REFERENCE in (select distinct trn.M_INSTRUMENT from TRN_HDR_DBF trn)
+-- and rtrim(plin.M_DSP_LABEL) in ('AL EPDP CME')
 
-);
-
-drop table VIW_PLI_DBF;
-create table VIW_PLI_DBF as select * from PLI_VIW;
-alter table  VIW_PLI_DBF move NOCOMPRESS;
-alter table  VIW_PLI_DBF add ID number GENERATED ALWAYS AS IDENTITY;
+order by FINASS, COMASS, PLILAB, SUBFML

@@ -33,6 +33,14 @@ to_char(trn.M_BRW_SDTE,'YYYY-MM-DD') STLDAT,
 case trn.M_TRN_GTYPE
 when 77 then fxs.M_XPFWMPRC
 when 84 then fxo.M_XPOPTFPRIC else null end STK,
+fxo.M_XPRMD  PRMCNT,
+case fxo.M_XPRMDQF
+when   100 then '% '||rtrim(M_XPRMDQN) 
+when 10000 then rtrim(M_XPRMDQN)||' pips' else null end PRMQOT,
+fxo.M_XPRM          PRMCAL,
+fxo.M_XPRMPA        PRMAMT,
+rtrim(fxo.M_XPRMPC) PRMCUR,
+to_char(fxo.M_XPRMPD,'YYYY-MM-DD') PRMSTL,
 
 case trn.M_TRN_GTYPE
 when 77 then fxs.M_XPQTY
@@ -60,7 +68,10 @@ where
 -- and fxd.M_XPTCUR <> fxc.M_SETTL_CUR
 trn.M_NB in 
 (
-61363460
+80840864,
+80840865,
+80840882,
+80840898
 )
 
 order by STLDAT, trn.M_NB 

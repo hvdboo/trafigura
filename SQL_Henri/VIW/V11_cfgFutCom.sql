@@ -172,8 +172,8 @@ to_char(vinper.M_START_DATE,'YYYY') UNDVIN,
 case
 when fcm.M_LISTED in (1,2,16,32) then coalesce(rtrim(fcchsr.M_LABEL), rtrim(fcshsr.M_LABEL)) else null end UNDHSR,
 case
-when fcm.M_LISTED in (1,2,16,32) then coalesce(fccidt.M_CRVICM0, fcsidt.M_CRVICM0)
-when fcm.M_LISTED in (64) then coalesce(ofcfccidt.M_CRVICM0, ofcfcsidt.M_CRVICM0)
+when fcm.M_LISTED in (1,2,16,32) then coalesce(fccidt.M_ROTICM0, fcsidt.M_ROTICM0)
+when fcm.M_LISTED in (64) then coalesce(ofcfccidt.M_ROTICM0, ofcfcsidt.M_ROTICM0)
 else null end CRVICM,
 -- DELIVERY
 case
